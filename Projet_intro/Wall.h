@@ -11,7 +11,7 @@ public:
     Wall(bool v = false, float p = 0);
 	~Wall();
 	bool isTouched(Ball ball); //return true is ball touch the wall, false else
-    bool getVertical() { return vertical_; };
+    bool getVertical() { return vertical_; }
 };
 
 #endif // !WALL

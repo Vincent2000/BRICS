@@ -23,21 +23,20 @@ Game::Game()
     //Création de la passerelle
     passerelle_= Passerelle();
 
-    //Initialisation des vies et de la balle
-    life_=3;
-    balle_=Ball(150.0,0.0);
+    //Initialisation des vies et de la balle sur la passerelle
+    life_ = 3;
+    balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2);
 
     //construction d'une liste de brique
     for (int i = 0; i < 10; i++) {
-        for (int j = 0; j < 12; j++)
-        {
-            listeBrique_.push_back(Brique((float)i, (float)(j+120)));
+        for (int j = 0; j < 12; j++) {
+            listeBrique_.push_back(Brique(i, j));
         }
     }
-};
+}
 
 Game::~Game() {
-};
+}
 
 
 void Game::verification() {
@@ -50,15 +49,15 @@ void Game::verification() {
         if (wallBot.isTouched(*it)) listeBall.erase(it);
     }
 */
-};
+}
 
 void Game::deleteTouchedBrique(Ball* ball)
 {
-    list<Brique>::iterator it;
+   /* list<Brique>::iterator it;
     for (it = listeBrique_.begin(); it != listeBrique_.end(); it++) {
         if (it->isTouched(ball)) listeBrique_.erase(it);
-    }
-};
+    }*/
+}
 
 bool Game::isFinished()
 {
@@ -67,13 +66,13 @@ bool Game::isFinished()
         return true;
     }
     else
-*/if(listeBrique_.empty())
+if(listeBrique_.empty())
     {
         cout << "Win";
         return true;
     }
-    return false;
-};
+    return false;*/
+}
 
 /*
 //time in ms

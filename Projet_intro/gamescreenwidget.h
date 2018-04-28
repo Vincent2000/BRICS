@@ -14,8 +14,9 @@ public:
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
-    Game getPartie() const;
-    void setPartie(const Game &partie);
+    Game getPartie() const{ return partie_; }
+    void setPartie(const Game &partie){ partie_ = partie;}
+    void keyPressEvent(QKeyEvent *event);
 
 signals:
 
@@ -23,7 +24,7 @@ public slots:
 
 private :
     QColor couleurF_;
-    Game *partie_=NULL;
+    Game partie_;
 };
 
 #endif // GAMESCREENWIDGET_H

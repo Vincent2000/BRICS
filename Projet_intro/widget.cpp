@@ -15,9 +15,8 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    Game partie=Game();
-    ui->GameSreen->setPartie(partie);
-    webCam_=new VideoCapture(0);
+    ui->GameSreen->setPartie(Game());
+    webCam_ = new VideoCapture(0);
     webCam_->set(CV_CAP_PROP_FRAME_WIDTH,frameWidth_);
     webCam_->set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight_);
     if(!webCam_->isOpened())  // check if we succeeded
@@ -27,7 +26,6 @@ Widget::Widget(QWidget *parent) :
     else
     {
         cout<<"Default camera open with success";
-
     }
 }
 
