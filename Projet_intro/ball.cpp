@@ -1,7 +1,16 @@
 #include "Ball.h"
 #include<GL/glu.h>
 
-Ball::Ball(float x, float y, float z ,float r, float a, float s)
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
+Ball::Ball(float x, float y, float r, float a, float s)
 {
     X_ = x;
     Y_ = y;
@@ -11,6 +20,15 @@ Ball::Ball(float x, float y, float z ,float r, float a, float s)
     speed_ = s;
 }
 
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 Ball::~Ball()
 {
 }

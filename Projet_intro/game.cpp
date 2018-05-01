@@ -6,19 +6,17 @@ using namespace std;
 
 /*
  * Constructeur de Game
- * Ce que je fais...
+ * Ce que je fais... je mange des frites
  *
  * Inputs :
- *
- * Outputs :
  *
  */
 Game::Game()
 {
-    wallTop_ = Wall(false, 0);
-    wallBot_ = Wall(false, 100);
-    wallLeft_ = Wall(true, 0);
-    wallRight_ = Wall(true, 100);
+    wallTop_ = Wall(false, true, 100);
+    wallBot_ = Wall(false, false, 0);
+    wallLeft_ = Wall(true, true, 0);
+    wallRight_ = Wall(true, false, 100);
 
     //Création de la passerelle
     passerelle_= Passerelle();
@@ -35,10 +33,27 @@ Game::Game()
     }
 }
 
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 Game::~Game() {
 }
 
-
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 void Game::verification() {
 /*	list<Ball>::iterator it;
     for (it = listeBall.begin(); it != listeBall.end(); it++)
@@ -51,6 +66,15 @@ void Game::verification() {
 */
 }
 
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 void Game::deleteTouchedBrique(Ball* ball)
 {
    /* list<Brique>::iterator it;
@@ -59,6 +83,15 @@ void Game::deleteTouchedBrique(Ball* ball)
     }*/
 }
 
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 bool Game::isFinished()
 {
 /*	if (listeBall.empty()) {

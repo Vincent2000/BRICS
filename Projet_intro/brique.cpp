@@ -1,8 +1,16 @@
 #include "Brique.h"
 #include<GL/glu.h>
 
-
-Brique::Brique(int i, int j, float w, float h, float d)
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
+Brique::Brique(float x, float y, float w, float h, float d)
 {
     width_ = w;
     height_ = h;
@@ -12,10 +20,28 @@ Brique::Brique(int i, int j, float w, float h, float d)
     Z_= 0.0;
 }
 
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 Brique::~Brique()
 {
 }
 
+/*
+* Constructeur de Game
+* Ce que je fais...
+*
+* Inputs :
+*
+* Outputs :
+*
+*/
 bool Brique::isTouched(Ball* ball) {
     //si la balle est en contact avec une surface verticale de la brique
     if ((X_ < ball->getX() + ball->getRadius() || ball->getX() - ball->getRadius() < X_ + width_) && Y_ < ball->getY() && ball->getY() < Y_ + height_)
