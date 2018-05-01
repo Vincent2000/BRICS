@@ -17,10 +17,11 @@ class Widget : public QWidget
 public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
+    void keyPressEvent(QKeyEvent *event);
+    void paintEvent(QPaintEvent *event);
 
 private:
     Ui::Widget *ui;
-    void paintEvent(QPaintEvent *event);
     VideoCapture * webCam_;
     int frameWidth_ =595;
     int frameHeight_ =230;

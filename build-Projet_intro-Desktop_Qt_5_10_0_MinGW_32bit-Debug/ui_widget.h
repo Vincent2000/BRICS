@@ -26,7 +26,7 @@ class Ui_Widget
 {
 public:
     QVBoxLayout *verticalLayout;
-    GameScreenWidget *GameSreen;
+    GameScreenWidget *GameScreen;
     QWidget *CamWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *CamView;
@@ -40,16 +40,16 @@ public:
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        GameSreen = new GameScreenWidget(Widget);
-        GameSreen->setObjectName(QStringLiteral("GameSreen"));
+        GameScreen = new GameScreenWidget(Widget);
+        GameScreen->setObjectName(QStringLiteral("GameScreen"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(GameSreen->sizePolicy().hasHeightForWidth());
-        GameSreen->setSizePolicy(sizePolicy);
-        GameSreen->setMinimumSize(QSize(1030, 381));
+        sizePolicy.setHeightForWidth(GameScreen->sizePolicy().hasHeightForWidth());
+        GameScreen->setSizePolicy(sizePolicy);
+        GameScreen->setMinimumSize(QSize(1030, 381));
 
-        verticalLayout->addWidget(GameSreen);
+        verticalLayout->addWidget(GameScreen);
 
         CamWidget = new QWidget(Widget);
         CamWidget->setObjectName(QStringLiteral("CamWidget"));

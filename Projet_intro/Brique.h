@@ -4,18 +4,18 @@
 
 class Brique
 {
+private:
     float X_;//position de l'abscisse
-    float Y_;//position de l'ordonnée
+    float Y_;//position de l'ordonn?e
     float Z_;//Position de cote
     float width_;//largeur
     float height_;//hauteur
     float depth_;//profondeur
 
-
 public:
     Brique(int i, int j, float w = 9.0, float h = 3.0, float d = 5.0);
-	~Brique();
-	bool isTouched(Ball* ball);//retrun true if ball touch the brique
+    ~Brique();
+    bool isTouched(Ball* ball);//retrun true if ball touch the brique
     void appears();
 
     //Setters

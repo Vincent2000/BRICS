@@ -15,7 +15,7 @@ Widget::Widget(QWidget *parent) :
     ui(new Ui::Widget)
 {
     ui->setupUi(this);
-    ui->GameSreen->setPartie(Game());
+    ui->GameScreen->setPartie(Game());
     webCam_ = new VideoCapture(0);
     webCam_->set(CV_CAP_PROP_FRAME_WIDTH,frameWidth_);
     webCam_->set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight_);
@@ -32,6 +32,7 @@ Widget::Widget(QWidget *parent) :
 Widget::~Widget()
 {
     delete ui;
+    delete webCam_;
 }
 
 void Widget::paintEvent(QPaintEvent *event)
@@ -60,4 +61,31 @@ void Widget::paintEvent(QPaintEvent *event)
         // Resize the label to fit the image
         ui->CamView->resize(ui->CamView->pixmap()->size());
     }
+}
+
+void Widget::keyPressEvent(QKeyEvent *event){
+    switch(event->key()){
+    // Sortie de l'application
+        case Qt::Key_Escape:
+        {
+            exit(0);
+            cout<<"prout"<<endl;
+            break;
+        }
+
+        // Cas par defaut
+        default:
+        {
+            // Ignorer l'evenement
+            ui->GameScreen->keyPressEvent(event);
+            return;
+        }
+    }
+//    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;
+//    ui->GameScreen->getPartie().getPasserelle().setX(0.0f);
+//    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;
+//    ui->GameScreen->getPartie().getPasserelle().setX(ui->GameScreen->getPartie().getPasserelle().getX()+3);
+//    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;
+    event->accept();
+    update();
 }
