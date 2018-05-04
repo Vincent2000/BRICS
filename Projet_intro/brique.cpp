@@ -10,7 +10,7 @@
 * Outputs :
 *
 */
-Brique::Brique(float x, float y, float w, float h, float d)
+Brique::Brique(int i,int j, float w, float h, float d)
 {
     width_ = w;
     height_ = h;
@@ -56,23 +56,32 @@ bool Brique::isTouched(Ball* ball) {
         return true;
     }
     //si la balle est en contact avec un point de la brique
+
+    //inferieur gauche
     if (pow(X_ - ball->getX(), 2) + pow(Y_ - ball->getY(), 2) < pow(ball->getRadius(), 2))
     {
-        ball->setAngle((float) 3.1415 * 3 / 4);
-//		angle = asin()
-    //	ball->setAngle(3.1415 + 2 * angle - ball->getAngle());
+        ball->setAngle(-(float) 3.1415 * 3 / 4);
         return true;
-    }else if(pow(X_ + width_ - ball->getX(), 2) + pow(Y_ - ball->getY(), 2) <  pow(ball->getRadius(), 2))
+    }
+
+    //inferieur droit
+    else if(pow(X_ + width_ - ball->getX(), 2) + pow(Y_ - ball->getY(), 2) <  pow(ball->getRadius(), 2))
     {
-        ball->setAngle((float)3.1415 * 1 / 4);
+        ball->setAngle(-(float)3.1415 * 1 / 4);
         return true;
-    }else if(pow(X_ - ball->getX(), 2) + pow(Y_ + height_ - ball->getY(), 2) <  pow(ball->getRadius(), 2))
+    }
+
+    //superieur gauche
+    else if(pow(X_ - ball->getX(), 2) + pow(Y_ + height_ - ball->getY(), 2) <  pow(ball->getRadius(), 2))
     {
-        ball->setAngle((float)3.1415 * (- 3 / 4));
+        ball->setAngle((float)3.1415 * (3 / 4));
         return true;
-    }else if(pow(X_ + width_ - ball->getX(), 2) + pow(Y_ + height_ - ball->getY(), 2) <  pow(ball->getRadius(), 2))
+    }
+
+    //superieur droit
+    else if(pow(X_ + width_ - ball->getX(), 2) + pow(Y_ + height_ - ball->getY(), 2) <  pow(ball->getRadius(), 2))
     {
-        ball->setAngle((float)3.1415 * (- 1 / 4));
+        ball->setAngle((float)3.1415 * (1 / 4));
         return true;
     }
 

@@ -10,7 +10,7 @@
 * Outputs :
 *
 */
-Ball::Ball(float x, float y, float r, float a, float s)
+Ball::Ball(float x, float y, float z, float r, float a, float s)
 {
     X_ = x;
     Y_ = y;

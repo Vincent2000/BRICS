@@ -60,4 +60,4 @@ bool Wall::isTouched(Ball ball) {
         if(ball.getX() - ball.getRadius() <= position_) return true;
         return false;
     }
-};
+}

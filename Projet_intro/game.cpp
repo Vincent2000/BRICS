@@ -55,7 +55,7 @@ Game::~Game() {
 *
 */
 void Game::verification() {
-        deleteTouchedBrique(balle_);
+        //deleteTouchedBrique(balle_);
         passerelle_.isTouched(&balle_);
         if (wallLeft_.isTouched(balle_) || wallRight_.isTouched(balle_)) balle_.impactV();
         if (wallTop_.isTouched(balle_)) balle_.impactH();
@@ -65,16 +65,17 @@ void Game::verification() {
         }
 }
 
-void Game::deleteTouchedBrique(Ball &ball)
-*/
+/*
+* Constructeur de Game
+* Ce que je fais...
 *
 * Outputs :
 *
 * Inputs :
 *
-* Ce que je fais...
-* Constructeur de Game
-/*
+
+*/
+void Game::deleteTouchedBrique(Ball &ball)
 {
     list<Brique>::iterator it;
     for (it = listeBrique_.begin(); it != listeBrique_.end(); it++) {

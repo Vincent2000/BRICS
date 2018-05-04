@@ -22,7 +22,7 @@ GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
         }
     });
 
-    m_AnimationTimer.setInterval(100);
+    m_AnimationTimer.setInterval(5);
     m_AnimationTimer.start();
 }
 
