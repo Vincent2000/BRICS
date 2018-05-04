@@ -1,0 +1,12 @@
+INPUT(
+./debug\main.o
+./debug\widget.o
+./debug\gamescreenwidget.o
+./debug\Ball.o
+./debug\game.o
+./debug\Brique.o
+./debug\passerelle.o
+./debug\wall.o
+./debug\moc_widget.o
+./debug\moc_gamescreenwidget.o
+);

@@ -44,13 +44,13 @@ Brique::~Brique()
 */
 bool Brique::isTouched(Ball* ball) {
     //si la balle est en contact avec une surface verticale de la brique
-    if ((X_ < ball->getX() + ball->getRadius() || ball->getX() - ball->getRadius() < X_ + width_) && Y_ < ball->getY() && ball->getY() < Y_ + height_)
+    if ((X_ < ball->getX() + ball->getRadius() && ball->getX() - ball->getRadius() < X_ + width_) && Y_ < ball->getY() && ball->getY() < Y_ + height_)
     {
         ball->impactV();
         return true;
     }
     //si la balle est en contact avec une surface horizontale de la brique
-    else if ((Y_ < ball->getY() + ball->getRadius() || ball->getY() - ball->getRadius() < Y_ + height_) && X_< ball->getX() && ball->getX() < X_ + width_)
+    else if ((Y_ < ball->getY() + ball->getRadius() && ball->getY() - ball->getRadius() < Y_ + height_) && X_< ball->getX() && ball->getX() < X_ + width_)
     {
         ball->impactH();
         return true;

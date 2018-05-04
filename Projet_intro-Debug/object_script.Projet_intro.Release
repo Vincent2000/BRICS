@@ -1,0 +1,12 @@
+INPUT(
+./release\main.o
+./release\widget.o
+./release\gamescreenwidget.o
+./release\Ball.o
+./release\game.o
+./release\Brique.o
+./release\passerelle.o
+./release\wall.o
+./release\moc_widget.o
+./release\moc_gamescreenwidget.o
+);

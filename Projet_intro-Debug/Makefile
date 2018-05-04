@@ -196,7 +196,6 @@ Makefile: ../Projet_intro/Projet_intro.pro D:/Qt/5.10.0/mingw53_32/mkspecs/win32
 		D:/Qt/5.10.0/mingw53_32/mkspecs/features/qt_config.prf \
 		D:/Qt/5.10.0/mingw53_32/mkspecs/win32-g++/qmake.conf \
 		D:/Qt/5.10.0/mingw53_32/mkspecs/features/spec_post.prf \
-		.qmake.stash \
 		D:/Qt/5.10.0/mingw53_32/mkspecs/features/exclusive_builds.prf \
 		D:/Qt/5.10.0/mingw53_32/mkspecs/features/toolchain.prf \
 		D:/Qt/5.10.0/mingw53_32/mkspecs/features/default_pre.prf \
@@ -221,6 +220,7 @@ Makefile: ../Projet_intro/Projet_intro.pro D:/Qt/5.10.0/mingw53_32/mkspecs/win32
 		D:/Qt/5.10.0/mingw53_32/mkspecs/features/lex.prf \
 		../Projet_intro/Projet_intro.pro \
 		D:/Qt/5.10.0/mingw53_32/lib/qtmaind.prl \
+		D:/Qt/5.10.0/mingw53_32/lib/Qt5OpenGL.prl \
 		D:/Qt/5.10.0/mingw53_32/lib/Qt5Widgets.prl \
 		D:/Qt/5.10.0/mingw53_32/lib/Qt5Gui.prl \
 		D:/Qt/5.10.0/mingw53_32/lib/Qt5Core.prl
@@ -360,7 +360,6 @@ D:/Qt/5.10.0/mingw53_32/mkspecs/features/qt_functions.prf:
 D:/Qt/5.10.0/mingw53_32/mkspecs/features/qt_config.prf:
 D:/Qt/5.10.0/mingw53_32/mkspecs/win32-g++/qmake.conf:
 D:/Qt/5.10.0/mingw53_32/mkspecs/features/spec_post.prf:
-.qmake.stash:
 D:/Qt/5.10.0/mingw53_32/mkspecs/features/exclusive_builds.prf:
 D:/Qt/5.10.0/mingw53_32/mkspecs/features/toolchain.prf:
 D:/Qt/5.10.0/mingw53_32/mkspecs/features/default_pre.prf:
@@ -385,6 +384,7 @@ D:/Qt/5.10.0/mingw53_32/mkspecs/features/yacc.prf:
 D:/Qt/5.10.0/mingw53_32/mkspecs/features/lex.prf:
 ../Projet_intro/Projet_intro.pro:
 D:/Qt/5.10.0/mingw53_32/lib/qtmaind.prl:
+D:/Qt/5.10.0/mingw53_32/lib/Qt5OpenGL.prl:
 D:/Qt/5.10.0/mingw53_32/lib/Qt5Widgets.prl:
 D:/Qt/5.10.0/mingw53_32/lib/Qt5Gui.prl:
 D:/Qt/5.10.0/mingw53_32/lib/Qt5Core.prl:

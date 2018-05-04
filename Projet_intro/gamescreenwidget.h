@@ -4,6 +4,7 @@
 #include <QtOpenGL>
 #include <QGLWidget>
 #include <QColor>
+#include <QTimer>
 #include "Game.h"
 
 class GameScreenWidget : public QGLWidget
@@ -23,8 +24,12 @@ signals:
 public slots:
 
 private :
+    //Timer d'animation
+    float m_TimeElapsed=0.0f;
+    QTimer m_AnimationTimer;
     QColor couleurF_;
     Game partie_;
+    bool isMoving_=false;
 };
 
 #endif // GAMESCREENWIDGET_H

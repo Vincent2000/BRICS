@@ -16,9 +16,9 @@
 #include <QtWidgets/QHBoxLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
-#include <QtWidgets/QOpenGLWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include "gamescreenwidget.h"
 
 QT_BEGIN_NAMESPACE
 
@@ -26,7 +26,7 @@ class Ui_Widget
 {
 public:
     QVBoxLayout *verticalLayout;
-    QOpenGLWidget *openGLWidget;
+    GameScreenWidget *GameScreen;
     QWidget *CamWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *CamView;
@@ -35,21 +35,21 @@ public:
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
-        Widget->resize(613, 635);
+        Widget->resize(1048, 763);
         verticalLayout = new QVBoxLayout(Widget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
         verticalLayout->setObjectName(QStringLiteral("verticalLayout"));
-        openGLWidget = new QOpenGLWidget(Widget);
-        openGLWidget->setObjectName(QStringLiteral("openGLWidget"));
+        GameScreen = new GameScreenWidget(Widget);
+        GameScreen->setObjectName(QStringLiteral("GameScreen"));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Preferred);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(openGLWidget->sizePolicy().hasHeightForWidth());
-        openGLWidget->setSizePolicy(sizePolicy);
-        openGLWidget->setMinimumSize(QSize(595, 381));
+        sizePolicy.setHeightForWidth(GameScreen->sizePolicy().hasHeightForWidth());
+        GameScreen->setSizePolicy(sizePolicy);
+        GameScreen->setMinimumSize(QSize(1030, 381));
 
-        verticalLayout->addWidget(openGLWidget);
+        verticalLayout->addWidget(GameScreen);
 
         CamWidget = new QWidget(Widget);
         CamWidget->setObjectName(QStringLiteral("CamWidget"));

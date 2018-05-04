@@ -29,6 +29,11 @@ Ball::Ball(float x, float y, float r, float a, float s)
 * Outputs :
 *
 */
+void Ball::move(float x, float y){
+    X_=X_+x;
+    Y_=Y_+y;
+}
+
 Ball::~Ball()
 {
 }
