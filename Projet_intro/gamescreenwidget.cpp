@@ -15,9 +15,11 @@ GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
     //Reglage de la taille
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
     connect(&m_AnimationTimer,&QTimer::timeout,[&]{
-        partie_.verification();
-        partie_.getBall()->move();
-        updateGL();
+        if (isMoving_){
+            partie_.verification();
+            partie_.getBall()->move();
+            updateGL();
+        }
     });
 
     m_AnimationTimer.setInterval(100);

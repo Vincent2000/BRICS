@@ -42,9 +42,12 @@ Game::~Game() {
 void Game::verification() {
         deleteTouchedBrique(balle_);
         passerelle_.isTouched(&balle_);
-//        if (wallLeft_.isTouched(balle_) || wallRight_.isTouched(balle_)) balle_.impactV();
-//        if (wallTop_.isTouched(balle_)) balle_.impactH();
-//        if (wallBot_.isTouched(balle_)) life_-=1;
+        if (wallLeft_.isTouched(balle_) || wallRight_.isTouched(balle_)) balle_.impactV();
+        if (wallTop_.isTouched(balle_)) balle_.impactH();
+        if (wallBot_.isTouched(balle_)) {
+            life_-=1;
+            balle_.impactV();
+        }
 }
 
 void Game::deleteTouchedBrique(Ball &ball)

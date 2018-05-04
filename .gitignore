@@ -4,3 +4,4 @@
 *.user
 *.exe
 Projet_intro-Debug\
+*.o
