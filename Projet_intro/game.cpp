@@ -25,7 +25,7 @@ Game::Game()
 
     //Initialisation des vies et de la balle sur la passerelle
     life_ = 3;
-    balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2);
+    balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 1+passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2);
 
     //construction d'une liste de brique
     for (int i = 0; i < 10; i++) {
@@ -40,23 +40,19 @@ Game::~Game() {
 
 
 void Game::verification() {
-/*	list<Ball>::iterator it;
-    for (it = listeBall.begin(); it != listeBall.end(); it++)
-    {
-        deleteTouchedBrique(&*it);
-        if (wallLeft.isTouched(*it) || wallRight.isTouched(*it)) it->impactV();
-        if (wallTop.isTouched(*it)) it->impactH();
-        if (wallBot.isTouched(*it)) listeBall.erase(it);
-    }
-*/
+        deleteTouchedBrique(balle_);
+        passerelle_.isTouched(&balle_);
+//        if (wallLeft_.isTouched(balle_) || wallRight_.isTouched(balle_)) balle_.impactV();
+//        if (wallTop_.isTouched(balle_)) balle_.impactH();
+//        if (wallBot_.isTouched(balle_)) life_-=1;
 }
 
-void Game::deleteTouchedBrique(Ball* ball)
+void Game::deleteTouchedBrique(Ball &ball)
 {
-   /* list<Brique>::iterator it;
+    list<Brique>::iterator it;
     for (it = listeBrique_.begin(); it != listeBrique_.end(); it++) {
-        if (it->isTouched(ball)) listeBrique_.erase(it);
-    }*/
+        if (it->isTouched(&ball)) listeBrique_.erase(it);
+    }
 }
 
 bool Game::isFinished()

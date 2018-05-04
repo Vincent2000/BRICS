@@ -68,8 +68,7 @@ void Widget::keyPressEvent(QKeyEvent *event){
     // Sortie de l'application
         case Qt::Key_Escape:
         {
-            exit(0);
-            cout<<"prout"<<endl;
+            close();
             break;
         }
 
@@ -78,7 +77,6 @@ void Widget::keyPressEvent(QKeyEvent *event){
         {
             // Ignorer l'evenement
             ui->GameScreen->keyPressEvent(event);
-            return;
         }
     }
 //    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;

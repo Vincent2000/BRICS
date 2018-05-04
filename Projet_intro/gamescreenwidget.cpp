@@ -14,6 +14,14 @@ GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
 {
     //Reglage de la taille
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
+    connect(&m_AnimationTimer,&QTimer::timeout,[&]{
+        partie_.verification();
+        partie_.getBall()->move();
+        updateGL();
+    });
+
+    m_AnimationTimer.setInterval(100);
+    m_AnimationTimer.start();
 }
 
 // Fonction d'initialisation : appelee lors de la création du widget OpenGL.
@@ -38,14 +46,13 @@ void GameScreenWidget::resizeGL(int width, int height)
     // Definition de la matrice de projection
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
-
-    gluPerspective(100, (double)4/3, 55, 60);
-    gluLookAt(60, 60, 60, 60, 60, 0, 0, 1, 0);
+    //glOrtho(-MAX_DIMENSION, MAX_DIMENSION, -MAX_DIMENSION * height / static_cast<float>(width), MAX_DIMENSION * height / static_cast<float>(width), 0.0f, 300.0f);
+    gluPerspective(100, (double)4/3, 55, 100);
     //glOrtho(0.0, 150.0, 0.0, 200.0, 0.0, 50.0);
     //glOrtho(-ORTHO_DIM * ASPECT_RATIO, ORTHO_DIM * ASPECT_RATIO, -ORTHO_DIM, ORTHO_DIM, 2.0f * ORTHO_DIM, 4.0f * ORTHO_DIM);
     //glOrtho(0, 10000, 0, 1000, 0, 10000);
     //glOrtho(0.0, 4.0, 0.0, 4.0, 0.0, 10.0);
-    //glOrtho(-MAX_DIMENSION, MAX_DIMENSION, -MAX_DIMENSION * height / static_cast<float>(width), MAX_DIMENSION * height / static_cast<float>(width), -MAX_DIMENSION * 2.0f, MAX_DIMENSION * 2.0f);
+
     // Definition de la matrice de modele
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -58,14 +65,11 @@ void GameScreenWidget::paintGL()
 
     // Reinitialisation de la matrice courante
     glLoadIdentity();
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glClearColor(couleurF_.redF(),couleurF_.greenF(),couleurF_.blueF(),couleurF_.alphaF());
-    //glOrtho(0.0, 150.0, 0.0, 200.0, 0.0, 50.0);
-    gluPerspective(100, (double)4/3, 55, 60);
-    gluLookAt(60, 60, 60, 60, 60, 0, 0, 1, 0);
+    gluLookAt(60, 40, 80, 60, 40, 0, 0, 1, 0);
 
-//    Dessin des briques
+    glClearColor(couleurF_.redF(),couleurF_.greenF(),couleurF_.blueF(),couleurF_.alphaF());
+
+    //    Dessin des briques
     int tailleListe = partie_.getListeBrique().size();
     list<Brique>::iterator it;
     it = partie_.getListeBrique().begin();
@@ -75,107 +79,85 @@ void GameScreenWidget::paintGL()
     }
 
     //Dessin de la balle
-    partie_.getBall().appears();
+    partie_.getBall()->appears();
 
     //Dessin de la passerelle
-    partie_.getPasserelle().appears();
-//    cout<<partie_.getPasserelle().getX()<<endl;
-//    for (it = partie_.getListeBrique().begin(); it != partie_.getListeBrique().end(); it++){
-//        it->appears();
-//    }
+    partie_.getPasserelle()->appears();
+
+    if (isMoving_){}
+    //    cout<<partie_.getPasserelle().getX()<<endl;
+    //    for (it = partie_.getListeBrique().begin(); it != partie_.getListeBrique().end(); it++){
+    //        it->appears();
+    //    }
 }
 
 void GameScreenWidget::keyPressEvent(QKeyEvent *event){
-    cout<<"ok"<<endl;
+
     switch(event->key()){
-        //Déplacement de la passerelle haut, bas, gauche, droite
-        case Qt::Key_Up:
-        {
-            Passerelle *passerellePointeur=&(partie_.getPasserelle());;
-            //passerellePointeur =
-            cout<<passerellePointeur->getX()<<endl;
-//            partie_.getPasserelle().setX(partie_.getPasserelle().getX()+3);
-            passerellePointeur->move(3, 0, 0);
-            cout<<passerellePointeur->getX()<<endl;
-            break;
-        }
-        case Qt::Key_Down:
-        {
-            partie_.getPasserelle().move(-3, 0, 0);
-            break;
-        }
-        case Qt::Key_Right:
-        {
-            partie_.getPasserelle().move(0, 3, 0);
-            break;
-        }
-        case Qt::Key_Left:
-        {
-            partie_.getPasserelle().move(0, -3, 0);
-            break;
-        }
-
-        //Déplacement de la balle z=haut, q=gauche, s=bas, d=droite
-//        case Qt::Key_Z:
-//        {
-//            //cout<<partie_.getPasserelle().getX()<<endl;
-//            partie_.getBall().setX(partie_.getPasserelle().getX()+3);
-//            partie_.getPasserelle().move(3, 0, 0);
-//            cout<<partie_.getPasserelle().getX()<<endl;
-//            break;
-//        }
-//        case Qt::Key_S:
-//        {
-//            partie_.getPasserelle().move(-3, 0, 0);
-//            break;
-//        }
-//        case Qt::Key_D:
-//        {
-//            partie_.getPasserelle().move(0, 3, 0);
-//            break;
-//        }
-//        case Qt::Key_Q:
-//        {
-//            partie_.getPasserelle().move(0, -3, 0);
-//            break;
-//        }
-
-        // Activation/Arret de l'animation
-        case Qt::Key_Space:
-        {
-//                if(m_AnimationTimer.isActive())
-//                    m_AnimationTimer.stop();
-//                else
-//                    m_AnimationTimer.start();
-
-            break;
-        }
-
-        // Sortie de l'application
-        case Qt::Key_Escape:
-        {
-            exit(0);
-            break;
-        }
-
-        // Cas par defaut
-        default:
-        {
-            // Ignorer l'evenement
-            event->ignore();
-            return;
-        }
+    //Déplacement de la passerelle gauche, droite
+    case Qt::Key_Right:
+    {
+        partie_.getPasserelle()->move(3, 0, 0);
+        break;
+    }
+    case Qt::Key_Left:
+    {
+        partie_.getPasserelle()->move(-3, 0, 0);
+        break;
     }
 
-//        Passerelle p = Passerelle();
-//        cout<<p.getX()<<endl;
-//        p.X_+=3;
-//        cout<<p.getX()+3<<endl;
+        //Déplacement de la balle z=haut, q=gauche, s=bas, d=droite
+    case Qt::Key_Z:
+    {
+        //cout<<partie_.getPasserelle().getX()<<endl;
+        partie_.getBall()->move(0.0,3.0);
+        break;
+    }
+    case Qt::Key_S:
+    {
+        partie_.getBall()->move(0.0,-3.0);
+        break;
+    }
+    case Qt::Key_D:
+    {
+        partie_.getBall()->move(3.0,0.0);
+        break;
+    }
+    case Qt::Key_Q:
+    {
+        partie_.getBall()->move(-3.0,0.0);
+        break;
+    }
 
-//        cout<<partie_.getPasserelle().getX()<<endl;
-//        partie_.getPasserelle().setX(partie_.getPasserelle().getX()+3);
-//        cout<<partie_.getPasserelle().getX()<<endl;
-        // Acceptation de l'evenement et mise a jour de la scene
-        event->accept();
-        updateGL();
+        // Activation/Arret de la balle
+    case Qt::Key_Space:
+    {
+        isMoving_=!isMoving_;
+        //                if(m_AnimationTimer.isActive())
+        //                    m_AnimationTimer.stop();
+        //                else
+        //                    m_AnimationTimer.start();
+
+        break;
+    }
+        // Cas par defaut
+    default:
+    {
+        // Ignorer l'evenement
+        event->ignore();
+        return;
+    }
+    }
+
+    //        Passerelle p = Passerelle();
+    //        cout<<p.getX()<<endl;
+    //        p.X_+=3;
+    //        cout<<p.getX()+3<<endl;
+
+    //        cout<<partie_.getPasserelle().getX()<<endl;
+    //        partie_.getPasserelle().setX(partie_.getPasserelle().getX()+3);
+    //        cout<<partie_.getPasserelle().getX()<<endl;
+    // Acceptation de l'evenement et mise a jour de la scene
+    event->accept();
+    updateGL();
 }

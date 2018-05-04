@@ -11,6 +11,11 @@ Ball::Ball(float x, float y, float z ,float r, float a, float s)
     speed_ = s;
 }
 
+void Ball::move(float x, float y){
+    X_=X_+x;
+    Y_=Y_+y;
+}
+
 Ball::~Ball()
 {
 }
