@@ -22,9 +22,9 @@ public:
     void setX(float x) { X_ = x; }
     void setY(float y) { Y_ = y; }
     void setZ(float z) { Z_ = z; }
-    /*void setWidth(float width){};
-    void setHeight(float height);
-    void setDepth(float depth);*/
+    void setWidth(float width){ width_ = width;}
+    void setHeight(float height) {height_ = height;}
+    void setDepth(float depth){depth_ = depth;}
 
     //Getter
     float getX() const { return X_;}
