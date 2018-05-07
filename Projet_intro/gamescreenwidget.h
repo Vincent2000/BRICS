@@ -29,7 +29,7 @@ private :
     QTimer m_AnimationTimer;
     QColor couleurF_;
     Game partie_;
-    bool isMoving_=false;
+    bool pause_;
 };
 
 #endif // GAMESCREENWIDGET_H

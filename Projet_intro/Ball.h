@@ -14,10 +14,10 @@ class Ball
     float speed_;
 
 public:
-    Ball(float x = 0.0f, float y = 0.0f, float z = 0.0f ,float r = 2.5f, float a = -3.1415f/2.0f, float s = 2.0f);
+    Ball(float x = 0.0f, float y = 0.0f, float z = 0.0f ,float r = 2.5f, float a = -3.14159f/2.0f, float s = 2.0f);
     ~Ball();
     void impactH() { angle_ *= -1; } //change l'angle pour un impact sur un surface horizontale
-    void impactV() { angle_ = (float)3.1415 - angle_; } //change l'angle pour un impact sur un surface verticale
+    void impactV() { angle_ = (float)3.14159 - angle_; } //change l'angle pour un impact sur un surface verticale
     void move() { X_ += speed_*cos(angle_); Y_ += speed_*sin(angle_); }
     void move(float x, float y);
     void appears();

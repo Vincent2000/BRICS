@@ -1,6 +1,7 @@
 #ifndef BRIQUE
 #define BRIQUE
 #include "Ball.h"
+#include"surface.h"
 
 class Brique
 {
@@ -12,10 +13,17 @@ private:
     float height_;//hauteur
     float depth_;//profondeur
 
+    //Surfaces de la brique. Celle de derrière est absente car elle n'est pas affichée et elle n'est jamais touchée par la balle
+    Surface * surfaceTop_;
+    Surface * surfaceBot_;
+    Surface * surfaceLeft_;
+    Surface * surfaceRight_;
+    Surface * surfaceForeground_;
+
 public:
-    Brique(int i, int j, float w = 9.0, float h = 3.0, float d = 5.0);
+    Brique(float x, float y, float w = 9.0, float h = 3.0, float d = 5.0);
     ~Brique();
-    bool isTouched(Ball* ball);//retrun true if ball touch the brique
+    bool isTouched(Ball* ball);
     void appears();
 
     //Setters
@@ -33,7 +41,11 @@ public:
     float getWidth() const{ return width_;}
     float getHeight() const{ return height_;}
     float getDepth() const{ return depth_;}
-
+    Surface *getSurfaceTop() const { return surfaceTop_; }
+    Surface *getSurfaceBot() const { return surfaceBot_; }
+    Surface *getSurfaceLeft() const { return surfaceLeft_; }
+    Surface *getSurfaceRight() const { return surfaceRight_; }
+    Surface *getSurfaceForeground() const { return surfaceForeground_; }
 };
 
 #endif

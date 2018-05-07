@@ -1,63 +1,43 @@
 #include "Wall.h"
 
-/*
-* Constructeur de Wall
-* initialise vertical_ par v et position_ par p
-*
-* Inputs : 
-*	v est un booléen qui indique si le mur est vertical (true) ou non (false)
-*	g est un booléen qui indique si le mur est à gauche (ou en-haut) (true) ou à droite (ou en-bas) (false)
-*	p est la position du mur
-*
-*/
-Wall::Wall(bool v, bool g_h, float p)
+/**
+ * @brief Wall::Wall
+ * @param xOrigine
+ * @param yOrigine
+ * @param zOrigine
+ * @param xNormal
+ * @param yNormal
+ * @param zNormal
+ * @param longueur
+ * @param largeur
+ * initialise le pointeur de surface_ avec ces paramÃ¨tres
+ */
+Wall::Wall(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur)//: Surface(xOrigine, yOrigine, zOrigine, xNormal, yNormal, zNormal, longueur, largeur)
 {
-    vertical_ = v;
-	gaucheOuHaut_ = g_h;
-    position_ = p;
+    surface_ = new Surface(xOrigine, yOrigine, zOrigine, xNormal, yNormal, zNormal, longueur, largeur);
 }
 
-/*
-* Déonstructeur de Wall
-* Rien
-*
-* Inputs :
-*
-* Outputs :
-*
-*/
+/**
+ * @brief Wall::~Wall
+ */
 Wall::~Wall()
 {
+//    delete  surface;
 }
 
-/*
-* Constructeur de Game
-*	1 - Condition pour savoir si le mur est vertical ou horizontal
-*	2 - Condition pour savoir si 
-* Inputs : 
-*	ball de type Ball 
-* Outputs :
-*	Retourne vrai si le mur est touché par la balle et faux sinon
-*
-*/
-bool Wall::isTouched(Ball ball) {
-    if (vertical_ && gaucheOuHaut_) {
-        if(ball.getX() - ball.getRadius() <= position_) return true;
-        return false;
-    }
+/**
+ * @brief Wall::appear
+ * Fonction d'affichage du mur.
+ * Elle utilise la fonction d'affichage de la classe surface pour afficher surface_
+ */
+void Wall::appear(){
+    GLfloat a [] = {0, 0.7, 0, 1};
 
-	if (vertical_ && !gaucheOuHaut_) {
-		if (ball.getX() + ball.getRadius() >= position_) return true;
-		return false;
-	}
-
-	if (!vertical_ && gaucheOuHaut_){
-		if (ball.getY() + ball.getRadius() >= position_) return true;
-		return false;
-	}
-
-    if (!vertical_ && !gaucheOuHaut_) {
-        if(ball.getX() - ball.getRadius() <= position_) return true;
-        return false;
-    }
+   // GLfloat colorAmbiant_tab[] = {(GLfloat) getColor().red()/255, (GLfloat) getColor().green()/255, (GLfloat) getColor().blue()/255, (GLfloat) getColor().alpha()/255};
+    GLfloat colorDiffuse_tab[] = {0.7, 0.0, 0.0, 1.0};
+    GLfloat colorSpecular_tab[] = {1.0, 1.0, 1.0, 1.0};
+    getSurface()->Surface::appear(a, a, a);
+//    cout<<"Origine = "<<this->getXOrigine()<<", "<<this->getYOrigine()<<", "<<this->getZOrigine()<<endl;
+//    cout<<"Normal = "<<this->getXNormal()<<", "<<this->getYNormal()<<", "<<this->getZNormal()<<endl;
+//    cout<<"Longeur = "<<this->getLongueur()<<", Largeur = "<<this->getLargeur()<<endl<<endl<<endl;
 }

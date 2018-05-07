@@ -1,18 +1,19 @@
 #ifndef WALL
 #define WALL
 #include"Ball.h"
+#include"surface.h"
+#include<iostream>
+using namespace std;
 
-class Wall
+class Wall//: public Surface
 {
-private:
-    bool vertical_; //true for vertical, false for horizontal
-	bool gaucheOuHaut_;
-    float position_; //the position
+    Surface * surface_;
+
 public:
-    Wall(bool v = false, bool g = false, float p = 0);
+    Wall(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur);
 	~Wall();
-	bool isTouched(Ball ball); //return true is ball touch the wall, false else
-	bool getVertical() { return vertical_; };
+    void appear();
+    Surface * getSurface() {return surface_;}
 };
 
 #endif // !WALL

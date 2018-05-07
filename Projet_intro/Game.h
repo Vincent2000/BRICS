@@ -6,7 +6,7 @@
 #include <iterator>
 #include <list>
 #include "Wall.h"
-#include"Passerelle.h"
+#include "Passerelle.h"
 
 using namespace std;
 
@@ -15,10 +15,10 @@ class Game {
     int life_;
     Ball balle_;
     list<Brique> listeBrique_;
-    Wall wallRight_;
-    Wall wallLeft_;
-    Wall wallTop_;
-    Wall wallBot_;
+    Wall *wallRight_;
+    Wall *wallLeft_;
+    Wall *wallTop_;
+    Wall *wallBot_;
 
 public:
     Game();
@@ -30,7 +30,11 @@ public:
     list<Brique> getListeBrique() const{return listeBrique_;}
     void setListeBrique(const list<Brique> &listeBrique){listeBrique_ = listeBrique;}
     Ball* getBall(){return &balle_;}
-    Passerelle* getPasserelle(){return &passerelle_;}
+    Passerelle* getPasserelle(){ return &passerelle_; }
+    Wall *getWallRight() const{ return wallRight_; }
+    Wall *getWallLeft() const{ return wallLeft_; }
+    Wall *getWallTop() const{ return wallTop_; }
+    Wall *getWallBot() const{ return wallBot_; }
 };
 
 

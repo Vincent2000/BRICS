@@ -61,6 +61,7 @@ void Widget::paintEvent(QPaintEvent *event)
         // Resize the label to fit the image
         ui->CamView->resize(ui->CamView->pixmap()->size());
     }
+    event->accept();
 }
 
 void Widget::keyPressEvent(QKeyEvent *event){

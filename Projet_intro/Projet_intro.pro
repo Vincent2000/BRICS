@@ -40,7 +40,8 @@ SOURCES += main.cpp \
     game.cpp \
     Brique.cpp \
     passerelle.cpp \
-    wall.cpp
+    wall.cpp \
+    surface.cpp
 
 HEADERS += widget.h \
     gamescreenwidget.h \
@@ -48,7 +49,8 @@ HEADERS += widget.h \
     Game.h \
     Passerelle.h \
     Wall.h \
-    Ball.h
+    Ball.h \
+    surface.h
 
 FORMS += widget.ui
 
