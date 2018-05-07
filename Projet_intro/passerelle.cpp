@@ -32,6 +32,7 @@ void Passerelle::move(float x, Wall * wallLeft, Wall * wallRight)
     if (newPosition + getWidth() > wallRight->getSurface()->getXOrigine()){
         newPosition = wallRight->getSurface()->getXOrigine() - getWidth();
     }
+    setX(newPosition);
     getSurfaceForeground()->setXOrigine(newPosition);
     getSurfaceLeft()->setXOrigine(newPosition);
     getSurfaceRight()->setXOrigine(newPosition + getWidth());

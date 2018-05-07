@@ -46,7 +46,7 @@ Brique::~Brique()
  * @param ball
  * @return vrai si la brique est touchée sur une surface et dévie la balle en conséquence
  */
-bool Brique::isTouched(Ball* ball) {
+bool Brique::isTouched(Ball * ball) {
     if(surfaceBot_->isTouched(ball) || surfaceTop_->isTouched(ball)){
         ball->impactH();
         return true;
