@@ -10,7 +10,7 @@ class Wall//: public Surface
     Surface * surface_;
 
 public:
-    Wall(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur);
+    Wall(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur, QColor color);
 	~Wall();
     void appear();
     Surface * getSurface() {return surface_;}

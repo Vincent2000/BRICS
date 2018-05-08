@@ -10,7 +10,7 @@
  * @param d
  * Initialisation des paramètres de coordonées de son point d'origine, de ses dimensions (largeur, hauteru, profondeur) et des 5 surfaces.
  */
-Brique::Brique(float x, float y, float w, float h, float d)
+Brique::Brique(float x, float y, float w, float h, float d, QColor color)
 {
     width_ = w;
     height_ = h;
@@ -18,11 +18,11 @@ Brique::Brique(float x, float y, float w, float h, float d)
     X_ = x;
     Y_ = y;
     Z_= 0.0;
-    surfaceLeft_ = new Surface(x, y, 0, -1, 0, 0, h, d);
-    surfaceRight_ = new Surface(x + w, y, 0, 1, 0, 0, h, d);
-    surfaceBot_ = new Surface(x, y, 0, 0, -1, 0, d, w);
-    surfaceTop_ = new Surface(x, y + h, 0, 0, 1, 0, d, w);
-    surfaceForeground_ = new Surface(x, y, d, 0, 0, 1, w, h);
+    surfaceLeft_ = new Surface(x, y, 0, -1, 0, 0, h, d, color);
+    surfaceRight_ = new Surface(x + w, y, 0, 1, 0, 0, h, d, color);
+    surfaceBot_ = new Surface(x, y, 0, 0, -1, 0, d, w, color);
+    surfaceTop_ = new Surface(x, y + h, 0, 0, 1, 0, d, w, color);
+    surfaceForeground_ = new Surface(x, y, d, 0, 0, 1, w, h, color);
 }
 
 
@@ -108,12 +108,12 @@ bool Brique::isTouched(Ball * ball) {
  * Elle affiche les 5 surfaces qui composent la brique
  */
 void Brique::appears(){
-    GLfloat a [] = {0, 0.7, 0, 1};
-    surfaceLeft_->appear(a, a, a);
-    surfaceRight_->appear(a, a, a);
-    surfaceBot_->appear(a, a, a);
-    surfaceTop_->appear(a, a, a);
-    surfaceForeground_->appear(a, a, a);
+//    GLfloat a [] = {0, 0.7, 0, 1};
+    surfaceLeft_->appear();
+    surfaceRight_->appear();
+    surfaceBot_->appear();
+    surfaceTop_->appear();
+    surfaceForeground_->appear();
     //    //Face sur le plan Z=0
     //    glColor3ub(250.0, 0.0, 0.0);
     //    glBegin(GL_QUADS);

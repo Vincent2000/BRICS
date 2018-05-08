@@ -60,6 +60,9 @@ void Widget::paintEvent(QPaintEvent *event)
         ui->CamView->setPixmap(QPixmap::fromImage(img));
         // Resize the label to fit the image
         ui->CamView->resize(ui->CamView->pixmap()->size());
+
+        //Mise à jour du nombre de vie
+        ui->nombredevie->setText(QString("Nombre de vies restantes"));
     }
     event->accept();
 }

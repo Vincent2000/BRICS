@@ -13,7 +13,7 @@
  * @param largeur
  * Initialisation de la position de l'origine, des coordonées du vecteur normal à la surface, de la longeur, de la largeur, de la couleur et de l'angle de la normale
  */
-Surface::Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur){
+Surface::Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur, QColor color){
     xOrigine_ = xOrigine;
     yOrigine_ = yOrigine;
     zOrigine_ = zOrigine;
@@ -22,7 +22,7 @@ Surface::Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, 
     zNormal_ = zNormal;
     longueur_ = longueur;
     largeur_ = largeur;
-    color_ = QColor(30, 30, 200, 255);
+    color_ = color;
     calculAngleNormal();
 }
 
@@ -64,13 +64,13 @@ float Surface::calculAngleNormal(){
  * @param colorDiffuse_tab
  * @param colorSpecular_tab
  */
-void Surface::appear(GLfloat colorAmbiant_tab [], GLfloat colorDiffuse_tab [], GLfloat colorSpecular_tab []){
+void Surface::appear(){
 //    gestion des couleurs des lampes sur l'objet
-    //GLfloat colorAmbiant_tab[] = {(GLfloat) color_.red()/255, (GLfloat) color_.green()/255, (GLfloat) color_.blue()/255, (GLfloat) color_.alpha()/255};
+    GLfloat colorAmbiant_tab[] = {(GLfloat) color_.red()/255, (GLfloat) color_.green()/255, (GLfloat) color_.blue()/255, (GLfloat) color_.alpha()/255};
     glMaterialfv(GL_FRONT, GL_AMBIENT, colorAmbiant_tab);
-//    //GLfloat colorDiffuse_tab[] = {0.3, 0.0, 0.0, 1.0};
+    GLfloat colorDiffuse_tab[] = {(GLfloat) 0.5 * color_.red()/255, (GLfloat) 0.5 * color_.green()/255, (GLfloat) 0.5 * color_.blue()/255, (GLfloat) color_.alpha()/255};
     glMaterialfv(GL_FRONT, GL_DIFFUSE, colorDiffuse_tab);
-//    //GLfloat colorSpecular_tab[] = {1.0, 1.0, 1.0, 1.0};
+    GLfloat colorSpecular_tab[] = {1.0, 1.0, 1.0, 1.0};
     glMaterialfv(GL_FRONT, GL_SPECULAR, colorSpecular_tab);
     glMaterialf(GL_FRONT, GL_SHININESS, 10);
 

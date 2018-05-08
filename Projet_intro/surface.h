@@ -23,10 +23,10 @@ class Surface
 
 
 public:
-    Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur);
+    Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur, QColor color);
     ~Surface();
     float calculAngleNormal();
-    void appear(GLfloat colorAmbiant_tab [], GLfloat colorDiffuse_tab [], GLfloat colorSpecular_tab []);
+    void appear();
     bool isTouched(Ball * ball); //return true is ball touch the wall, false else
 
 //    Getters et Setters

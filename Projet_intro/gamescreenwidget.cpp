@@ -53,9 +53,12 @@ void GameScreenWidget::initializeGL()
 
     //ativation de la lumière
     glEnable(GL_LIGHTING);
-    glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, (GLfloat) 100.0);
+    glLightModelf(GL_LIGHT_MODEL_LOCAL_VIEWER, 0.0f);
     glEnable(GL_LIGHT0);
+    GLfloat directionLamp_tab [] = {1.0f, 1.0f, 1.0f, 0.0f};
+    glLightfv(GL_LIGHT0, GL_POSITION, directionLamp_tab);
     GLfloat lamp_tab[] = {1.0, 1.0, 1.0, 100.0};
+    GLfloat a [] = {(GLfloat)0.5, (GLfloat)0.5,(GLfloat)0.5, (GLfloat)1.0};
     glLightfv(GL_LIGHT0, GL_AMBIENT, lamp_tab);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lamp_tab);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lamp_tab);
@@ -77,7 +80,7 @@ void GameScreenWidget::resizeGL(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     //glOrtho(-MAX_DIMENSION, MAX_DIMENSION, -MAX_DIMENSION * height / static_cast<float>(width), MAX_DIMENSION * height / static_cast<float>(width), 0.0f, 300.0f);
-    gluPerspective(100, (double)4/3, 55, 100);
+    gluPerspective(68, (double)4/3, 114, 121);
     //glOrtho(0.0, 150.0, 0.0, 200.0, 0.0, 50.0);
     //glOrtho(-ORTHO_DIM * ASPECT_RATIO, ORTHO_DIM * ASPECT_RATIO, -ORTHO_DIM, ORTHO_DIM, 2.0f * ORTHO_DIM, 4.0f * ORTHO_DIM);
     //glOrtho(0, 10000, 0, 1000, 0, 10000);
@@ -101,7 +104,7 @@ void GameScreenWidget::paintGL()
 
     // Reinitialisation de la matrice courante
     glLoadIdentity();
-    gluLookAt(60, 40, 80, 60, 40, 0, 0, 1, 0);
+    gluLookAt(60, 75, 120, 60, 75, 0, 0, 1, 0);
 
     glClearColor(couleurF_.redF(),couleurF_.greenF(),couleurF_.blueF(),couleurF_.alphaF());
 
@@ -117,6 +120,9 @@ void GameScreenWidget::paintGL()
     //Affichage de la balle
     partie_.getBall()->appears();
 
+    //Accélaration de la balle
+    partie_.getBall()->upSpeed(0.0004);
+
     //Affichage de la passerelle
     partie_.getPasserelle()->appears();
 
@@ -124,11 +130,11 @@ void GameScreenWidget::paintGL()
 //    cout<<"Origine = "<< partie_.getWallBot()->getXOrigine()<<", "<< partie_.getWallBot()->getYOrigine()<<", "<< partie_.getWallBot()->getZOrigine()<<endl;
 //    cout<<"Normal = "<< partie_.getWallBot()->getXNormal()<<", "<< partie_.getWallBot()->getYNormal()<<", "<< partie_.getWallBot()->getZNormal()<<endl;
 //    cout<<"Longeur = "<< partie_.getWallBot()->getLongueur()<<", Largeur = "<< partie_.getWallBot()->getLargeur()<<endl<<endl<<endl;
-    GLfloat a[]={1.0, 0, 0, 1.0};
-    partie_.getWallBot()->getSurface()->appear(a, a, a);
-    partie_.getWallTop()->getSurface()->appear(a, a, a);
-    partie_.getWallLeft()->getSurface()->appear(a, a, a);
-    partie_.getWallRight()->getSurface()->appear(a, a, a);
+    partie_.getWallBot()->getSurface()->appear();
+    partie_.getWallTop()->getSurface()->appear();
+    partie_.getWallLeft()->getSurface()->appear();
+    partie_.getWallRight()->getSurface()->appear();
+    partie_.getWallBackground()->getSurface()->appear();
 //    float xOrigine_ = 120; float yOrigine_ = 0; float zOrigine_ = 0;
 //    float xNormal_ = -1; float yNormal_ = 0; float zNormal_ = 0;
 //    float longueur_ = 122; float largeur_ = 5;
@@ -196,6 +202,14 @@ void GameScreenWidget::keyPressEvent(QKeyEvent *event){
             //                    m_AnimationTimer.start();
             break;
         }
+//        case Qt::Key_Plus:
+//        {
+//            float newWidth = partie_.getPasserelle()->getWidth() + 1;
+//            partie_.getPasserelle()->getSurfaceForeground()->setWidth(newWidth);
+//            partie_.getPasserelle()->getSurfaceRight()->setXOrigine(newWidth);
+//            partie_.getPasserelle()->getSurfaceBot()->setWidth(newWidth);
+//            partie_.getPasserelle()->getSurfaceTop()->setWidth(newWidth);
+//        }
         // Cas par defaut
         default:
         {

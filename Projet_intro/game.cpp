@@ -16,22 +16,23 @@ Game::Game()
     int colonne = 10;
     int ligne = 12;
     float espaceEntreBrique = 3;
-    float yPosition = 50;
+    float yPosition = 80;
     float depth = 5;
     float xPosition = 0;
     float widthBrique = 9;
     float heightBrique = 3;
     //construction d'une liste de brique
     for (int i = 0; i < colonne; i++) {
-        yPosition = 50;
+        yPosition = 80;
         for (int j = 0; j < ligne; j++) {
-            listeBrique_.push_back(Brique(xPosition, yPosition, widthBrique, heightBrique, depth));
+            listeBrique_.push_back(Brique(xPosition, yPosition, widthBrique, heightBrique, depth, QColor(180, 180, 180, 255)));
             yPosition += espaceEntreBrique + heightBrique;
         }
         xPosition += widthBrique + espaceEntreBrique;
     }
+    xPosition += espaceEntreBrique;
     //Création de la passerelle
-    passerelle_= Passerelle((xPosition-10)/2, 0);
+    passerelle_= Passerelle((xPosition-10)/2, 0, 20, 5, 5, QColor(255, 140, 0, 255));
     //Initialisation des vies et de la balle sur la passerelle
     life_ = 2;
     balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 1+passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2);
@@ -40,10 +41,11 @@ Game::Game()
     cout<<"yPosition = "<<yPosition<<endl;
     cout<<"depth = "<<depth<<endl;
     //Constrution des 4 murs
-    wallBot_ = new Wall(0, passerelle_.getY(), 0, 0, 1, 0, depth, xPosition);
-    wallTop_ = new Wall(0, yPosition, 0, 0, -1, 0, depth, xPosition);
-    wallLeft_ = new Wall(0, passerelle_.getY(), 0, 1, 0, 0, yPosition, depth);
-    wallRight_ = new Wall(xPosition , passerelle_.getY(), 0, -1, 0, 0, yPosition, depth);
+    wallBot_ = new Wall(-espaceEntreBrique, passerelle_.getY(), 0, 0, 1, 0, depth, xPosition, QColor(100, 200, 0, 255));
+    wallTop_ = new Wall(-espaceEntreBrique, yPosition, 0, 0, -1, 0, depth, xPosition, QColor(0, 115, 255, 255));
+    wallLeft_ = new Wall(-espaceEntreBrique, passerelle_.getY(), 0, 1, 0, 0, yPosition, depth, QColor(0, 115, 255, 255));
+    wallRight_ = new Wall(xPosition - espaceEntreBrique, passerelle_.getY(), 0, -1, 0, 0, yPosition, depth, QColor(0, 115, 255, 255));
+    wallBackground_ = new Wall(- espaceEntreBrique, passerelle_.getY(), 0, 0, 0, 1, xPosition, yPosition, QColor(255, 255, 255, 255));
 
 //    cout<<"Origine = "<< wallRight_->getXOrigine()<<", "<< wallRight_->getYOrigine()<<", "<< wallRight_->getZOrigine()<<endl;
 //    cout<<"Normal = "<< wallRight_->getXNormal()<<", "<< wallRight_->getYNormal()<<", "<< wallRight_->getZNormal()<<endl;

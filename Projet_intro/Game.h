@@ -19,6 +19,7 @@ class Game {
     Wall *wallLeft_;
     Wall *wallTop_;
     Wall *wallBot_;
+    Wall *wallBackground_;
 
 public:
     Game();
@@ -29,12 +30,15 @@ public:
     //void moveBall(float time);
     list<Brique> getListeBrique() const{return listeBrique_;}
     void setListeBrique(const list<Brique> &listeBrique){listeBrique_ = listeBrique;}
+    //Getter
+    int getLife() {return life_;}
     Ball* getBall(){return &balle_;}
     Passerelle* getPasserelle(){ return &passerelle_; }
     Wall *getWallRight() const{ return wallRight_; }
     Wall *getWallLeft() const{ return wallLeft_; }
     Wall *getWallTop() const{ return wallTop_; }
     Wall *getWallBot() const{ return wallBot_; }
+    Wall *getWallBackground() const{ return wallBackground_; }
 };
 
 

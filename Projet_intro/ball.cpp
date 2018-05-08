@@ -54,7 +54,7 @@ void Ball::appears(){
     //gestion des couleurs des lampes sur l'objet
     GLfloat colorAmbiant_tab[] = {0.7, 0.0, 0.0, 1.0};
     glMaterialfv(GL_FRONT, GL_AMBIENT, colorAmbiant_tab);
-    GLfloat colorDiffuse_tab[] = {0.9, 0.0, 0.0, 100.0};
+    GLfloat colorDiffuse_tab[] = {0.9, 0.0, 0.0, 1.0};
     glMaterialfv(GL_FRONT, GL_DIFFUSE, colorDiffuse_tab);
     GLfloat colorSpecular_tab[] = {1.0, 1.0, 1.0, 1.0};
     glMaterialfv(GL_FRONT, GL_SPECULAR, colorSpecular_tab);
@@ -64,7 +64,7 @@ void Ball::appears(){
     glPushMatrix();
     glTranslatef(X_, Y_ + radius_, Z_);
     //glColor3f(250.0, 0.0, 0.0);
-    gluSphere(quadrique, radius_, 20, 20);
+    gluSphere(quadrique, radius_, 30, 30);
     glPopMatrix();
     gluDeleteQuadric(quadrique);
 

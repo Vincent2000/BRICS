@@ -10,7 +10,7 @@
  * @param d la profondeur
  * Appel au constructeur de Brique
  */
-Passerelle::Passerelle(float x, float y, float w, float h, float d) : Brique(x, y, w, h, d)
+Passerelle::Passerelle(float x, float y, float w, float h, float d, QColor color) : Brique(x, y, w, h, d, color)
 {
 }
 

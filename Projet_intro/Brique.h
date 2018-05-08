@@ -21,7 +21,7 @@ private:
     Surface * surfaceForeground_;
 
 public:
-    Brique(float x, float y, float w = 9.0, float h = 3.0, float d = 5.0);
+    Brique(float x = 0, float y = 0, float w = 9.0, float h = 3.0, float d = 5.0, QColor color = QColor(180, 180, 180, 255));
     ~Brique();
     bool isTouched(Ball* ball);
     void appears();

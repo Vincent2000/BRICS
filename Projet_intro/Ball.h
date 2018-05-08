@@ -10,7 +10,7 @@ class Ball
     float Z_; //position de la profondeur du centre
     float radius_;//rayon
     //Couleur
-    float angle_;// in radians
+    float angle_;// en radians
     float speed_;
 
 public:
@@ -21,7 +21,7 @@ public:
     void move() { X_ += speed_*cos(angle_); Y_ += speed_*sin(angle_); }
     void move(float x, float y);
     void appears();
-    //void move(float )
+    void upSpeed(float s){ speed_ += s;}
     //Getters
     float getX() { return X_; }
     float getY() { return Y_; }

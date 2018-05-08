@@ -27,9 +27,11 @@ class Ui_Widget
 public:
     QVBoxLayout *verticalLayout;
     GameScreenWidget *GameScreen;
+    QHBoxLayout *horizontalLayout_2;
     QWidget *CamWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *CamView;
+    QLabel *nombredevie;
 
     void setupUi(QWidget *Widget)
     {
@@ -51,6 +53,9 @@ public:
 
         verticalLayout->addWidget(GameScreen);
 
+        horizontalLayout_2 = new QHBoxLayout();
+        horizontalLayout_2->setSpacing(6);
+        horizontalLayout_2->setObjectName(QStringLiteral("horizontalLayout_2"));
         CamWidget = new QWidget(Widget);
         CamWidget->setObjectName(QStringLiteral("CamWidget"));
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -72,7 +77,15 @@ public:
         horizontalLayout->addWidget(CamView);
 
 
-        verticalLayout->addWidget(CamWidget);
+        horizontalLayout_2->addWidget(CamWidget);
+
+        nombredevie = new QLabel(Widget);
+        nombredevie->setObjectName(QStringLiteral("nombredevie"));
+
+        horizontalLayout_2->addWidget(nombredevie);
+
+
+        verticalLayout->addLayout(horizontalLayout_2);
 
 
         retranslateUi(Widget);
@@ -84,6 +97,7 @@ public:
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "Widget", nullptr));
         CamView->setText(QApplication::translate("Widget", "TextLabel", nullptr));
+        nombredevie->setText(QApplication::translate("Widget", "TextLabel", nullptr));
     } // retranslateUi
 
 };
