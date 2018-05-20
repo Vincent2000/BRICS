@@ -9,7 +9,12 @@
 using namespace std;
 using namespace cv;
 
-
+/**
+ * @brief Widget::Widget
+ * @param parent
+ * Constructeur de Widget
+ * @author Quentin
+ */
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
@@ -29,12 +34,22 @@ Widget::Widget(QWidget *parent) :
     }
 }
 
+/**
+ * @brief Widget::~Widget
+ * Destruction de ui et de webcam_
+ * @author Quentin
+ */
 Widget::~Widget()
 {
     delete ui;
     delete webCam_;
 }
 
+/**
+ * @brief Widget::paintEvent
+ * @param event
+ * @author Quentin
+ */
 void Widget::paintEvent(QPaintEvent *event)
 {
     //Mise à jour du nombre de vie
@@ -69,6 +84,11 @@ void Widget::paintEvent(QPaintEvent *event)
     event->accept();
 }
 
+/**
+ * @brief Widget::keyPressEvent
+ * @param event
+ * @author Quentin
+ */
 void Widget::keyPressEvent(QKeyEvent *event){
     switch(event->key()){
     // Sortie de l'application

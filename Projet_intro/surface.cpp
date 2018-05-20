@@ -12,6 +12,7 @@
  * @param longueur
  * @param largeur
  * Initialisation de la position de l'origine, des coordonées du vecteur normal à la surface, de la longeur, de la largeur, de la couleur et de l'angle de la normale
+ * @author Vincent
  */
 Surface::Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur, QColor color){
     xOrigine_ = xOrigine;
@@ -27,18 +28,18 @@ Surface::Surface(float xOrigine, float yOrigine, float zOrigine, float xNormal, 
 }
 
 
-
 /**
  * @brief Surface::~Surface
+ * @author Vincent
  */
 Surface::~Surface(){
 }
 
 
-
 /**
  * @brief Surface::calculAngleNormal
  * @return l'angle de la normale
+ * @author Vincent
  */
 float Surface::calculAngleNormal(){
     angleNormal_ = 0.0;
@@ -63,6 +64,7 @@ float Surface::calculAngleNormal(){
  * @param colorAmbiant_tab
  * @param colorDiffuse_tab
  * @param colorSpecular_tab
+ * @author Vincent
  */
 void Surface::appear(){
 //    gestion des couleurs des lampes sur l'objet
@@ -89,6 +91,7 @@ void Surface::appear(){
  * @brief Surface::isTouched
  * @param ball
  * @return vrai si la surface est touchée et faux sinon
+ * @author Vincent
  */
 bool Surface::isTouched(Ball * ball) {
     if((abs( abs(xNormal_)*(xOrigine_ - ball->getX()) + abs(yNormal_)*(yOrigine_ - ball->getY())) <= ball->getRadius()) &&

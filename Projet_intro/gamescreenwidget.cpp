@@ -13,6 +13,7 @@ const float MAX_DIMENSION     = 50.0f;
 /**
  * @brief GameScreenWidget::GameScreenWidget
  * @param parent
+ * @author Quentin
  */
 GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
 {
@@ -29,8 +30,8 @@ GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
                 partie_.verification();
                 partie_.getBall()->move();
             }
-            updateGL();
         }
+        updateGL();
     });
 
     m_AnimationTimer.setInterval(5);
@@ -39,9 +40,14 @@ GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
 
 
 
-// Fonction d'initialisation : appelee lors de la création du widget OpenGL.
-// Elle permet entre autres de définir les differentes options OpenGL ici(la
-// couleur du fond, l'activation ou non de la 3D par exemple)
+
+/**
+ * @brief GameScreenWidget::initializeGL
+ * Fonction d'initialisation : appelee lors de la création du widget OpenGL.
+ * Elle permet entre autres de définir les differentes options OpenGL ici(la
+ * couleur du fond, l'activation ou non de la 3D par exemple)
+ * @author Quentin
+ */
 void GameScreenWidget::initializeGL()
 {
     //Reglage de la couleur du fond
@@ -71,6 +77,7 @@ void GameScreenWidget::initializeGL()
  * @brief GameScreenWidget::resizeGL
  * @param width
  * @param height
+ * @author Quentin
  */
 void GameScreenWidget::resizeGL(int width, int height)
 {
@@ -97,6 +104,7 @@ void GameScreenWidget::resizeGL(int width, int height)
 /**
  * @brief GameScreenWidget::paintGL
  * Affichage des briques, de la balle, de la paserelle et de 4 murs
+ * @author Quentin et Vincent
  */
 void GameScreenWidget::paintGL()
 {
@@ -153,6 +161,7 @@ void GameScreenWidget::paintGL()
  * Déplacement de la passerelle avec les flèches de gauche et de droite
  * Déplacement de la balle avec les touches Z, S, Q et D
  * Mise en pause avec la touche espace
+ * @author Quentin et Vincent
  */
 void GameScreenWidget::keyPressEvent(QKeyEvent *event){
 
@@ -200,14 +209,16 @@ void GameScreenWidget::keyPressEvent(QKeyEvent *event){
             //                    m_AnimationTimer.start();
             break;
         }
-//        case Qt::Key_Plus:
-//        {
-//            float newWidth = partie_.getPasserelle()->getWidth() + 1;
-//            partie_.getPasserelle()->getSurfaceForeground()->setWidth(newWidth);
-//            partie_.getPasserelle()->getSurfaceRight()->setXOrigine(newWidth);
-//            partie_.getPasserelle()->getSurfaceBot()->setWidth(newWidth);
-//            partie_.getPasserelle()->getSurfaceTop()->setWidth(newWidth);
-//        }
+        case Qt::Key_Plus:
+        {
+            if(pause_) partie_.getPasserelle()->changeWitdth(1, partie_.getWallBot()->getSurface()->getLargeur());
+            break;
+        }
+        case Qt::Key_Minus:
+        {
+            if(pause_) partie_.getPasserelle()->changeWitdth(-1, partie_.getWallBot()->getSurface()->getLargeur());
+            break;
+        }
         // Cas par defaut
         default:
         {

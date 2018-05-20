@@ -2,7 +2,12 @@
 #include <QApplication>
 
 #include <cstdio>
-
+/**
+ * @brief qMain
+ * @param argc
+ * @param argv
+ * @author Quentin
+ */
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);

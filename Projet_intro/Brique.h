@@ -13,7 +13,7 @@ private:
     float height_;//hauteur
     float depth_;//profondeur
 
-    //Surfaces de la brique. Celle de derrière est absente car elle n'est pas affichée et elle n'est jamais touchée par la balle
+    //Surfaces de la brique. Celle de derrière est absente car elle n'est pas affichée et elle n'est jamais touchée par la balle.
     Surface * surfaceTop_;
     Surface * surfaceBot_;
     Surface * surfaceLeft_;

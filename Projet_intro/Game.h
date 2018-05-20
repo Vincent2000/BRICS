@@ -36,7 +36,7 @@ public:
 	bool isFinished();
     list<Brique> getListeBrique() const{return listeBrique_;}
     void setListeBrique(const list<Brique> &listeBrique){listeBrique_ = listeBrique;}
-    void buildListBrique(float &xPosition, float &yPosition);
+    void initializeListBrique(float &xPosition, float &yPosition);
     void newGame();
 
     //Getter

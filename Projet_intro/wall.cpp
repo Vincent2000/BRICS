@@ -10,25 +10,31 @@
  * @param zNormal
  * @param longueur
  * @param largeur
- * initialise le pointeur de surface_ avec ces paramètres
+ * Constructeur de Wall
+ * Initialisation du pointeur de surface_ avec ces paramètres
+ * @author Vincent
  */
-Wall::Wall(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur, QColor color)//: Surface(xOrigine, yOrigine, zOrigine, xNormal, yNormal, zNormal, longueur, largeur)
+Wall::Wall(float xOrigine, float yOrigine, float zOrigine, float xNormal, float yNormal, float zNormal, float longueur, float largeur, QColor color)
 {
     surface_ = new Surface(xOrigine, yOrigine, zOrigine, xNormal, yNormal, zNormal, longueur, largeur, color);
 }
 
 /**
  * @brief Wall::~Wall
+ * Destructeur de Wall
+ * Destruction du pointeur surface_
+ * @author Vincent
  */
 Wall::~Wall()
 {
-//    delete  surface;
+    surface_->~Surface();
 }
 
 /**
  * @brief Wall::appear
  * Fonction d'affichage du mur.
  * Elle utilise la fonction d'affichage de la classe surface pour afficher surface_
+ * @author Vincent
  */
 void Wall::appear(){
     getSurface()->Surface::appear();

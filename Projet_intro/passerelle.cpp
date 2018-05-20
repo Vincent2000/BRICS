@@ -9,6 +9,7 @@
  * @param h la hauteur
  * @param d la profondeur
  * Appel au constructeur de Brique
+ * @author Vincent
  */
 Passerelle::Passerelle(float x, float y, float w, float h, float d, QColor color) : Brique(x, y, w, h, d, color)
 {
@@ -21,6 +22,7 @@ Passerelle::Passerelle(float x, float y, float w, float h, float d, QColor color
  * Déplacement de la passerelle en fonction de :
  * @param x pour le abscisses
  * et déplacement des surfaces qui la composent
+ * @author Vincent
  */
 void Passerelle::move(float x, Wall * wallLeft, Wall * wallRight)
 {
@@ -47,6 +49,7 @@ void Passerelle::move(float x, Wall * wallLeft, Wall * wallRight)
  * @param ball
  * Détermine si la passerelle est touchée par la balle et modifie son angle de trajectoire selon son point d'impact
  * @return vrai si la passerelle est touchée
+ * @author Vincent
  */
 bool Passerelle::isTouched(Ball * ball){
 
@@ -101,4 +104,22 @@ bool Passerelle::isTouched(Ball * ball){
     }
 
     return false;
+}
+
+/**
+ * @brief Passerelle::changeWitdth
+ * @param w
+ * Augmente ou diminue la largeur de la passerelle de w
+ * Elle ne peut pas dépasser la taille du jeu et reste toujours positive
+ * @author Vincent
+ */
+void Passerelle::changeWitdth(float w, float maximum){
+    float newWidth = getWidth() + w;
+    if(0 < newWidth && newWidth <= maximum) {
+        setWidth(newWidth);
+        getSurfaceForeground()->setLongueur(newWidth);
+        getSurfaceRight()->setXOrigine(getSurfaceRight()->getXOrigine() + w);
+        getSurfaceBot()->setLargeur(newWidth);
+        getSurfaceTop()->setLargeur(newWidth);
+    }
 }

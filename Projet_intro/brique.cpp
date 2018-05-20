@@ -8,7 +8,9 @@
  * @param w
  * @param h
  * @param d
+ * Constructeur de brique
  * Initialisation des paramètres de coordonées de son point d'origine, de ses dimensions (largeur, hauteru, profondeur) et des 5 surfaces.
+ * @author Vincent
  */
 Brique::Brique(float x, float y, float w, float h, float d, QColor color)
 {
@@ -29,14 +31,16 @@ Brique::Brique(float x, float y, float w, float h, float d, QColor color)
 
 /**
  * @brief Brique::~Brique
+ * Destructeur de Brique
+ * @author Vincent
  */
 Brique::~Brique()
 {
-//    delete surfaceBot;
-//    delete surfaceForeground;
-//    delete surfaceLeft;
-//    delete surfaceRight;
-//    delete surfaceTop;
+    surfaceTop_->~Surface();
+    surfaceBot_->~Surface();
+    surfaceLeft_->~Surface();
+    surfaceRight_->~Surface();
+    surfaceForeground_->~Surface();
 }
 
 
@@ -45,6 +49,7 @@ Brique::~Brique()
  * @brief Brique::isTouched
  * @param ball
  * @return vrai si la brique est touchée sur une surface et dévie la balle en conséquence
+ * @author Vincent
  */
 bool Brique::isTouched(Ball * ball) {
     if(surfaceBot_->isTouched(ball) || surfaceTop_->isTouched(ball)){
@@ -106,60 +111,12 @@ bool Brique::isTouched(Ball * ball) {
  * @brief Brique::appears
  * Fonction d'affichage de la balle.
  * Elle affiche les 5 surfaces qui composent la brique
+ * @author Vincent
  */
 void Brique::appears(){
-//    GLfloat a [] = {0, 0.7, 0, 1};
     surfaceLeft_->appear();
     surfaceRight_->appear();
     surfaceBot_->appear();
     surfaceTop_->appear();
     surfaceForeground_->appear();
-    //    //Face sur le plan Z=0
-    //    glColor3ub(250.0, 0.0, 0.0);
-    //    glBegin(GL_QUADS);
-    //    glVertex3f(X_, Y_, Z_);
-    //    glVertex3f(X_ + width_, Y_, Z_);
-    //    glVertex3f(X_ + width_, Y_ + height_, Z_);
-    //    glVertex3f(X_, Y_ + height_, Z_);
-    //    glEnd();
-    //    //Face su le plan Z=depth
-    //    glColor3ub(0.0, 250.0, 0.0);
-    //    glBegin(GL_QUADS);
-    //    glVertex3f(X_, Y_,  Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_,  Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_ + height_,  Z_ + depth_);
-    //    glVertex3f(X_, Y_ + height_,  Z_ + depth_);
-    //    glEnd();
-    //    //Face sur le plan X=0
-    //    glColor3ub(0.0, 0.0, 250.0);
-    //    glBegin(GL_QUADS);
-    //    glVertex3f(X_, Y_, Z_);
-    //    glVertex3f(X_, Y_ + height_, Z_);
-    //    glVertex3f(X_, Y_ + height_, Z_ + depth_);
-    //    glVertex3f(X_, Y_, Z_ + depth_);
-    //    glEnd();
-    //    //Face sur le plan X=width
-    //    glColor3ub(250.0, 250.0, 0.0);
-    //    glBegin(GL_QUADS);
-    //    glVertex3f(X_ + width_, Y_, Z_);
-    //    glVertex3f(X_ + width_, Y_ + height_, Z_);
-    //    glVertex3f(X_ + width_, Y_ + height_, Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_, Z_ + depth_);
-    //    glEnd();
-    //    //Face sur le plan Y=0
-    //    glColor3ub(250.0, 0.0, 250.0);
-    //    glBegin(GL_QUADS);
-    //    glVertex3f(X_, Y_, Z_);
-    //    glVertex3f(X_, Y_, Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_, Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_, Z_);
-    //    glEnd();
-    //    //Face sur le plan Y=height
-    //    glColor3ub(0.0, 250.0, 250.0);
-    //    glBegin(GL_QUADS);
-    //    glVertex3f(X_, Y_ + height_, Z_);
-    //    glVertex3f(X_, Y_ + height_, Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_ + height_, Z_ + depth_);
-    //    glVertex3f(X_ + width_, Y_ + height_, Z_);
-    //    glEnd();
 }

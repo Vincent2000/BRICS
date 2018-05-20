@@ -4,13 +4,13 @@
 /**
  * @brief Ball::Ball
  * Initialisation de paramètres
- * @param x
- * @param y
- * @param z
- * @param r
- * @param a
+ * @param x abscisse du centre de la balle
+ * @param y ordonnée du centre de la balle
+ * @param z côte de centre de la balle
+ * @param r pour le rayon
+ * @param a pour l'angle
  * @param s pour la vitesse
- *
+ * @author Vincent
  */
 Ball::Ball(float x, float y, float z, float r, float a, float s)
 {
@@ -23,25 +23,15 @@ Ball::Ball(float x, float y, float z, float r, float a, float s)
 }
 
 
-
-/**
- * @brief Ball::~Ball
- */
-Ball::~Ball()
-{
-}
-
-
-
 /**
  * @brief Ball::move
  * Déplacement de la balle en fonction de :
- * @param x pour le abscisses
+ * @param x pour les abscisses
  * @param y pour les ordonnées
  */
 void Ball::move(float x, float y){
-    X_=X_+x;
-    Y_=Y_+y;
+    X_ = X_ + x;
+    Y_ = Y_ + y;
 }
 
 
@@ -49,6 +39,7 @@ void Ball::move(float x, float y){
 /**
  * @brief Ball::appears
  * Fonction d'affichage de la balle
+ * @author Vincent
  */
 void Ball::appears(){
     //gestion des couleurs des lampes sur l'objet
