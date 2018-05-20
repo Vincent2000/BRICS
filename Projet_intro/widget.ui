@@ -67,6 +67,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="nombredepoint">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="nombredevie">
        <property name="text">
         <string>TextLabel</string>

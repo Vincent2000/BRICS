@@ -37,6 +37,10 @@ Widget::~Widget()
 
 void Widget::paintEvent(QPaintEvent *event)
 {
+    //Mise à jour du nombre de vie
+    ui->nombredevie->setText(QString("Nombre de vies restantes : ")+QString::number(ui->GameScreen->getPartie().getLife()));
+    ui->nombredepoint->setText(QString("Points : ")+QString::number(ui->GameScreen->getPartie().getNombrePoint()));
+
     Mat image;
     //Define rectangle to display
     Rect workingRect(frameWidth_/3,frameHeight_/3,150,150);
@@ -61,8 +65,6 @@ void Widget::paintEvent(QPaintEvent *event)
         // Resize the label to fit the image
         ui->CamView->resize(ui->CamView->pixmap()->size());
 
-        //Mise à jour du nombre de vie
-        ui->nombredevie->setText(QString("Nombre de vies restantes"));
     }
     event->accept();
 }
@@ -83,11 +85,6 @@ void Widget::keyPressEvent(QKeyEvent *event){
             ui->GameScreen->keyPressEvent(event);
         }
     }
-//    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;
-//    ui->GameScreen->getPartie().getPasserelle().setX(0.0f);
-//    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;
-//    ui->GameScreen->getPartie().getPasserelle().setX(ui->GameScreen->getPartie().getPasserelle().getX()+3);
-//    cout<< ui->GameScreen->getPartie().getPasserelle().getX()<<endl;
     event->accept();
     update();
 }

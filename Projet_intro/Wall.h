@@ -1,8 +1,8 @@
 #ifndef WALL
 #define WALL
+
 #include"Ball.h"
 #include"surface.h"
-#include<iostream>
 using namespace std;
 
 class Wall//: public Surface

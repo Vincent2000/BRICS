@@ -13,43 +13,41 @@ using namespace std;
  */
 Game::Game()
 {
-    int colonne = 10;
-    int ligne = 12;
-    float espaceEntreBrique = 3;
-    float yPosition = 80;
-    float depth = 5;
-    float xPosition = 0;
-    float widthBrique = 9;
-    float heightBrique = 3;
-    //construction d'une liste de brique
-    for (int i = 0; i < colonne; i++) {
-        yPosition = 80;
-        for (int j = 0; j < ligne; j++) {
-            listeBrique_.push_back(Brique(xPosition, yPosition, widthBrique, heightBrique, depth, QColor(180, 180, 180, 255)));
-            yPosition += espaceEntreBrique + heightBrique;
-        }
-        xPosition += widthBrique + espaceEntreBrique;
-    }
-    xPosition += espaceEntreBrique;
+    colonne_ = 10;
+    ligne_ = 12;
+    espaceEntreBrique_ = 3.0f;
+    depth_ = 5.0f;
+    widthBrique_ = 9.0f;
+    heightBrique_ = 3.0f;
+//    int yPosition = 80;
+//    int xPosition = 0;
+//    //construction d'une liste de brique
+//    for (int i = 0; i < colonne_; i++) {
+//        yPosition = 80;
+//        for (int j = 0; j < ligne_; j++) {
+//            listeBrique_.push_back(Brique(xPosition, yPosition, widthBrique_, heightBrique_, depth_, QColor(180, 180, 180, 255)));
+//            yPosition += espaceEntreBrique_ + heightBrique_;
+//        }
+//        xPosition += widthBrique_ + espaceEntreBrique_;
+//    }
+//    xPosition += espaceEntreBrique;
+    float xPosition;
+    float yPosition;
+    buildListBrique(xPosition, yPosition);
     //Création de la passerelle
-    passerelle_= Passerelle((xPosition-10)/2, 0, 20, 5, 5, QColor(255, 140, 0, 255));
-    //Initialisation des vies et de la balle sur la passerelle
+    passerelle_ = Passerelle((xPosition-10)/2, 0, 20, 5, 5, QColor(255, 140, 0, 255));
+    //Initialisation des vies, du nombre de point et de la balle sur la passerelle
     life_ = 2;
-    balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 1+passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2);
-    cout<<"yPasserelle = "<<passerelle_.getY()<<endl;
-    cout<<"xPosition = "<<xPosition<<endl;
-    cout<<"yPosition = "<<yPosition<<endl;
-    cout<<"depth = "<<depth<<endl;
-    //Constrution des 4 murs
-    wallBot_ = new Wall(-espaceEntreBrique, passerelle_.getY(), 0, 0, 1, 0, depth, xPosition, QColor(100, 200, 0, 255));
-    wallTop_ = new Wall(-espaceEntreBrique, yPosition, 0, 0, -1, 0, depth, xPosition, QColor(0, 115, 255, 255));
-    wallLeft_ = new Wall(-espaceEntreBrique, passerelle_.getY(), 0, 1, 0, 0, yPosition, depth, QColor(0, 115, 255, 255));
-    wallRight_ = new Wall(xPosition - espaceEntreBrique, passerelle_.getY(), 0, -1, 0, 0, yPosition, depth, QColor(0, 115, 255, 255));
-    wallBackground_ = new Wall(- espaceEntreBrique, passerelle_.getY(), 0, 0, 0, 1, xPosition, yPosition, QColor(255, 255, 255, 255));
+    nombrePoint_ = 0;
+    balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 1+passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2, 2.5f, -3.14159f/2.0f, 2.0f);
 
-//    cout<<"Origine = "<< wallRight_->getXOrigine()<<", "<< wallRight_->getYOrigine()<<", "<< wallRight_->getZOrigine()<<endl;
-//    cout<<"Normal = "<< wallRight_->getXNormal()<<", "<< wallRight_->getYNormal()<<", "<< wallRight_->getZNormal()<<endl;
-//    cout<<"Longeur = "<< wallRight_->getLongueur()<<", Largeur = "<< wallRight_->getLargeur()<<endl<<endl<<endl;
+    //Constrution des 4 murs
+    wallBot_ = new Wall(-espaceEntreBrique_, passerelle_.getY(), 0, 0, 1, 0, depth_, xPosition, QColor(100, 200, 0, 255));
+    wallTop_ = new Wall(-espaceEntreBrique_, yPosition, 0, 0, -1, 0, depth_, xPosition, QColor(0, 115, 255, 255));
+    wallLeft_ = new Wall(-espaceEntreBrique_, passerelle_.getY(), 0, 1, 0, 0, yPosition, depth_, QColor(0, 115, 255, 255));
+    wallRight_ = new Wall(xPosition - espaceEntreBrique_, passerelle_.getY(), 0, -1, 0, 0, yPosition, depth_, QColor(0, 115, 255, 255));
+    wallBackground_ = new Wall(- espaceEntreBrique_, passerelle_.getY(), 0, 0, 0, 1, xPosition, yPosition, QColor(255, 255, 255, 255));
+
 }
 
 
@@ -78,7 +76,7 @@ void Game::verification() {
     if (wallTop_->getSurface()->isTouched(&balle_)) balle_.impactH();
     if (wallBot_->getSurface()->isTouched(&balle_)) {
         life_ -= 1;
-        balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 1+passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2);
+        balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 1+passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2, 2.5f, -3.14159f/2.0f, balle_.getSpeed());
     }
 }
 
@@ -94,7 +92,10 @@ void Game::deleteTouchedBrique(Ball &ball)
 {
     list<Brique>::iterator it;
     for (it = listeBrique_.begin(); it != listeBrique_.end(); it++) {
-        if (it->isTouched(&ball)) listeBrique_.erase(it);
+        if (it->isTouched(&ball)) {
+            listeBrique_.erase(it);
+            nombrePoint_ += 1;
+        }
     }
 }
 
@@ -108,4 +109,31 @@ void Game::deleteTouchedBrique(Ball &ball)
 bool Game::isFinished()
 {
     return life_ < 0 || listeBrique_.empty();
+}
+
+void Game::buildListBrique(float &xPosition, float &yPosition) {
+    listeBrique_.clear();
+    xPosition = 0;
+    for (int i = 0; i < colonne_; i++) {
+        yPosition = 80;
+        for (int j = 0; j < ligne_; j++) {
+            listeBrique_.push_back(Brique(xPosition, yPosition, widthBrique_, heightBrique_, depth_, QColor(180, 180, 180, 255)));
+            yPosition += espaceEntreBrique_ + heightBrique_;
+        }
+        xPosition += widthBrique_ + espaceEntreBrique_;
+    }
+    xPosition += espaceEntreBrique_;
+}
+
+/**
+ * @brief Game::newGame
+ * Réinitialisation le nombre de vie et la liste de briques
+ * Augmentation de la vitese de la balle
+ */
+void Game::newGame(){
+    life_ = 3;
+    balle_.upSpeed(0.75);
+    float a = 0;
+    float b = 0;
+    buildListBrique(a, b);
 }

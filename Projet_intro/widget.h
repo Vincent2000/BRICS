@@ -23,8 +23,8 @@ public:
 private:
     Ui::Widget *ui;
     VideoCapture * webCam_;
-    int frameWidth_ =595;
-    int frameHeight_ =230;
+    int frameWidth_ = 595;
+    int frameHeight_ = 230;
 };
 
 #endif // WIDGET_H

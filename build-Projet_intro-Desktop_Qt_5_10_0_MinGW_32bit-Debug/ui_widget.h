@@ -31,6 +31,7 @@ public:
     QWidget *CamWidget;
     QHBoxLayout *horizontalLayout;
     QLabel *CamView;
+    QLabel *nombredepoint;
     QLabel *nombredevie;
 
     void setupUi(QWidget *Widget)
@@ -79,6 +80,11 @@ public:
 
         horizontalLayout_2->addWidget(CamWidget);
 
+        nombredepoint = new QLabel(Widget);
+        nombredepoint->setObjectName(QStringLiteral("nombredepoint"));
+
+        horizontalLayout_2->addWidget(nombredepoint);
+
         nombredevie = new QLabel(Widget);
         nombredevie->setObjectName(QStringLiteral("nombredevie"));
 
@@ -97,6 +103,7 @@ public:
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "Widget", nullptr));
         CamView->setText(QApplication::translate("Widget", "TextLabel", nullptr));
+        nombredepoint->setText(QApplication::translate("Widget", "TextLabel", nullptr));
         nombredevie->setText(QApplication::translate("Widget", "TextLabel", nullptr));
     } // retranslateUi
 

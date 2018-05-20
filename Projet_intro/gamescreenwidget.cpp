@@ -18,11 +18,12 @@ GameScreenWidget::GameScreenWidget(QWidget *parent) : QGLWidget(parent)
 {
     //Reglage de la taille
     setFixedSize(WIN_WIDTH, WIN_HEIGHT);
-    pause_ = false;
+    pause_ = true;
     connect(&m_AnimationTimer, &QTimer::timeout, [&]{
-        if (pause_){
+        if (!pause_){
             if(partie_.isFinished()){
-                pause_ = false;
+                pause_ = true;
+                partie_.newGame();
             }
             else {
                 partie_.verification();
@@ -58,7 +59,7 @@ void GameScreenWidget::initializeGL()
     GLfloat directionLamp_tab [] = {1.0f, 1.0f, 1.0f, 0.0f};
     glLightfv(GL_LIGHT0, GL_POSITION, directionLamp_tab);
     GLfloat lamp_tab[] = {1.0, 1.0, 1.0, 100.0};
-    GLfloat a [] = {(GLfloat)0.5, (GLfloat)0.5,(GLfloat)0.5, (GLfloat)1.0};
+    //GLfloat a [] = {(GLfloat)0.5, (GLfloat)0.5,(GLfloat)0.5, (GLfloat)1.0};
     glLightfv(GL_LIGHT0, GL_AMBIENT, lamp_tab);
     glLightfv(GL_LIGHT0, GL_DIFFUSE, lamp_tab);
     glLightfv(GL_LIGHT0, GL_SPECULAR, lamp_tab);
@@ -120,9 +121,6 @@ void GameScreenWidget::paintGL()
     //Affichage de la balle
     partie_.getBall()->appears();
 
-    //Accélaration de la balle
-    partie_.getBall()->upSpeed(0.0004);
-
     //Affichage de la passerelle
     partie_.getPasserelle()->appears();
 
@@ -162,12 +160,12 @@ void GameScreenWidget::keyPressEvent(QKeyEvent *event){
         //Déplacement de la passerelle gauche, droite
         case Qt::Key_Right:
         {
-            partie_.getPasserelle()->move(3, partie_.getWallLeft(), partie_.getWallRight());
+            if (!pause_) partie_.getPasserelle()->move(3, partie_.getWallLeft(), partie_.getWallRight());
             break;
         }
         case Qt::Key_Left:
         {
-            partie_.getPasserelle()->move(-3, partie_.getWallLeft(), partie_.getWallRight());
+            if (!pause_) partie_.getPasserelle()->move(-3, partie_.getWallLeft(), partie_.getWallRight());
             break;
         }
         //Déplacement de la balle z=haut, q=gauche, s=bas, d=droite

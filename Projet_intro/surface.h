@@ -40,6 +40,7 @@ public:
     float getLargeur() const { return largeur_;}
     QColor getColor() const{ return color_; }
     float getAngleNormal() const { return angleNormal_; }
+
     void setXOrigine(float xOrigine) { xOrigine_ = xOrigine;}
     void setYOrigine(float yOrigine) { yOrigine_ = yOrigine;}
     void setZOrigine(float zOrigine) { zOrigine_ = zOrigine;}
