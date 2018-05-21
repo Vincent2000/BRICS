@@ -4,6 +4,8 @@
 #include<QColor>
 #include"Ball.h"
 #include<cmath>
+#include<iostream>
+using namespace std;
 
 class Surface
 {

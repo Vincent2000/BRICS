@@ -90,16 +90,35 @@ void Surface::appear(){
 /**
  * @brief Surface::isTouched
  * @param ball
+ * Change l'angle de la balle
  * @return vrai si la surface est touchée et faux sinon
  * @author Vincent
  */
 bool Surface::isTouched(Ball * ball) {
+    float ballAngle = fmod(ball->getAngle(), 2*3.14159);
+    if(ballAngle > 3.14159) ballAngle += -2 * 3.14159;
+    //Cas de la surface plane
     if((abs( abs(xNormal_)*(xOrigine_ - ball->getX()) + abs(yNormal_)*(yOrigine_ - ball->getY())) <= ball->getRadius()) &&
        (0 <= abs(xNormal_)*(ball->getY() - yOrigine_) + abs(yNormal_)*(ball->getX() - xOrigine_)) &&
-            (abs(xNormal_)*(ball->getY() - yOrigine_) + abs(yNormal_)*(ball->getX() - xOrigine_) <= abs(xNormal_)*longueur_ + abs(yNormal_)*largeur_)) return true;
+            (abs(xNormal_)*(ball->getY() - yOrigine_) + abs(yNormal_)*(ball->getX() - xOrigine_) <= abs(xNormal_)*longueur_ + abs(yNormal_)*largeur_))
+    {
+        ball->setAngle(3.14159 * abs(xNormal_) - ballAngle);
+        cout<<ball->getAngle()<<endl;
+        return true;
+    }
     // Cas des arrêtes
-    if(pow(ball->getX() - xOrigine_, 2) + pow (ball->getY() - yOrigine_, 2) <= pow (ball->getRadius(), 2)) return true;
-    if(pow(ball->getX() - (xOrigine_ + abs(yNormal_) * largeur_), 2) + pow (ball->getY() - (yOrigine_ + abs(xNormal_) * longueur_), 2) <= pow (ball->getRadius(), 2)) return true;
+    //Arrête de l'origine
+    if(pow(ball->getX() - xOrigine_, 2) + pow (ball->getY() - yOrigine_, 2) <= pow (ball->getRadius(), 2)){
+        ball->setAngle(abs(xNormal_) * (- ballAngle/abs(ballAngle) * 3.14159 / 2 * (1 - xNormal_ * 0.5)) + yNormal_ * 3.14159/2 * (1 + 0.5 * (ballAngle + 3.14159 / 2) / abs(ballAngle + 3.14159 / 2)));
+        cout<<ball->getAngle()<<endl;
+        return true;
+    }
+    //Arrête oppposée à l'origine
+    if(pow(ball->getX() - (xOrigine_ + abs(yNormal_) * largeur_), 2) + pow (ball->getY() - (yOrigine_ + abs(xNormal_) * longueur_), 2) <= pow (ball->getRadius(), 2)) {
+        ball->setAngle(abs(xNormal_) * (- ballAngle/abs(ballAngle) * 3.14159 / 2 * (1 - xNormal_ * 0.5)) + yNormal_ * 3.14159/2 * (1 + 0.5 * (ballAngle + 3.14159 / 2) / abs(ballAngle + 3.14159 / 2)));
+        cout<<ball->getAngle()<<endl;
+        return true;
+    }
 //    if((yNormal_ * ball->getY() - ball->getRadius() + xNormal_ * ball->getX() <= yNormal_ * yOrigine_ + xNormal_ * xOrigine_) &&
 //       (yNormal_ * ball->getY() + ball->getRadius() + xNormal_ * ball->getX() >= yNormal_ * yOrigine_ + xNormal_ * xOrigine_) &&
 //      ((xOrigine_ < ball->getX() && ball->getX() < xOrigine_ + largeur_) || (yOrigine_ < ball->getY() && ball->getY() < yOrigine_ + longueur_))) return true;

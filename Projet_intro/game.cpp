@@ -65,8 +65,11 @@ Game::~Game() {
 void Game::verification() {
     deleteTouchedBrique(balle_);
     passerelle_.isTouched(&balle_);
-    if (wallLeft_->getSurface()->isTouched(&balle_) || wallRight_->getSurface()->isTouched(&balle_)) balle_.impactV();
-    if (wallTop_->getSurface()->isTouched(&balle_)) balle_.impactH();
+    wallLeft_->getSurface()->isTouched(&balle_);
+    wallRight_->getSurface()->isTouched(&balle_);
+    wallTop_->getSurface()->isTouched(&balle_);
+//    if (wallLeft_->getSurface()->isTouched(&balle_) || wallLeft_->getSurface()->isTouched(&balle_)) balle_.impactV();
+//    if wallLeft_->getSurface()->isTouched(&balle_)) balle_.impactH();
     if (wallBot_->getSurface()->isTouched(&balle_)) {
         life_ -= 1;
         balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 2 + passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2, 2.5f, -3.14159f/2.0f, balle_.getSpeed());
@@ -131,12 +134,15 @@ void Game::initializeListBrique(float &xPosition, float &yPosition) {
  * @brief Game::newGame
  * Réinitialisation le nombre de vie et la liste de briques
  * Augmentation de la vitese de la balle
+ * Repositionnement la balle sur la passerelle
  * @author Vincent
  */
 void Game::newGame(){
     life_ = 2;
-    balle_.upSpeed(0.75);
+    balle_.upSpeed(0.7);
     float a = 0;
     float b = 0;
     initializeListBrique(a, b);
+    balle_ = Ball(passerelle_.getX() + passerelle_.getWidth()/2, 2 + passerelle_.getY() + passerelle_.getHeight(), passerelle_.getZ() + passerelle_.getDepth()/2, 2.5f, -3.14159f/2.0f, balle_.getSpeed());
+
 }
