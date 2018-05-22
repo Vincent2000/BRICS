@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1048</width>
-    <height>763</height>
+    <height>991</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -17,7 +17,7 @@
    <item>
     <widget class="GameScreenWidget" name="GameScreen">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -25,7 +25,7 @@
      <property name="minimumSize">
       <size>
        <width>1030</width>
-       <height>381</height>
+       <height>600</height>
       </size>
      </property>
     </widget>
@@ -43,7 +43,7 @@
        <property name="minimumSize">
         <size>
          <width>595</width>
-         <height>230</height>
+         <height>300</height>
         </size>
        </property>
        <property name="layoutDirection">

@@ -3,8 +3,10 @@
 
 #include "opencv2/opencv.hpp"
 #include <QWidget>
+#include <Vector>
 
 using namespace cv;
+using namespace std;
 
 namespace Ui {
 class Widget;
@@ -22,9 +24,10 @@ public:
 
 private:
     Ui::Widget *ui;
-    VideoCapture * webCam_;
+    VideoCapture webCam_;
     int frameWidth_ = 595;
-    int frameHeight_ = 230;
+    int frameHeight_ = 400;
+    Vector <Rect> motion_Rect_;
 };
 
 #endif // WIDGET_H
