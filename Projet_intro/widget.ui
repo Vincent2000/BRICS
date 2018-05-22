@@ -2,18 +2,27 @@
 <ui version="4.0">
  <class>Widget</class>
  <widget class="QWidget" name="Widget">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>1048</width>
-    <height>991</height>
+    <height>904</height>
    </rect>
   </property>
-  <property name="windowTitle">
-   <string>Widget</string>
+  <property name="maximumSize">
+   <size>
+    <width>1048</width>
+    <height>991</height>
+   </size>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
+  <property name="windowTitle">
+   <string>Casse Brique</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_2">
    <item>
     <widget class="GameScreenWidget" name="GameScreen">
      <property name="sizePolicy">
@@ -67,18 +76,29 @@
       </widget>
      </item>
      <item>
-      <widget class="QLabel" name="nombredepoint">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLabel" name="nombredevie">
-       <property name="text">
-        <string>TextLabel</string>
-       </property>
-      </widget>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QLabel" name="text_info">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="nombredevie">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="nombredepoint">
+         <property name="text">
+          <string>TextLabel</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>

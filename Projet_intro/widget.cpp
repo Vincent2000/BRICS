@@ -21,6 +21,16 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->GameScreen->setPartie(Game());
+    ui->text_info->setText("Enter :  réinitialiser le vecteur \nEspace : Lancer la partie \n");
+    ui->text_info->setAlignment(Qt::AlignCenter);
+    QFont f( "Arial", 10, QFont::Bold);
+    ui->text_info->setFont( f);
+
+    ui->nombredepoint->setAlignment(Qt::AlignCenter);
+    ui->nombredepoint->setFont( f);
+
+    ui->nombredevie->setAlignment(Qt::AlignCenter);
+    ui->nombredevie->setFont( f);
 
     //Define rectangle to display
     workingRect_=Rect((frameWidth_-subImageWidth_)/3,frameHeight_/3+(frameHeight_/3-subImageHeight_)/3,subImageWidth_,subImageHeight_);
