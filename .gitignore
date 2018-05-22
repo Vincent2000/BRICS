@@ -3,5 +3,5 @@
 *.a5d8936
 *.user
 *.exe
-Projet_intro-Debug\
+Projet_intro-Debug/**
 *.o
