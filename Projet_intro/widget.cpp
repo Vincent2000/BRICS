@@ -23,9 +23,11 @@ Widget::Widget(QWidget *parent) :
     ui->GameScreen->setPartie(Game());
 
     //Define rectangle to display
-    workingRect_=Rect((frameWidth_-subImageWidth_)/3,frameHeight_/3+(frameHeight_/3-subImageHeight_)/3,subImageWidth_,subImageHeight_);
+    workingRect_=Rect((frameWidth_-subImageWidth_)/2,frameHeight_/2+(frameHeight_/2-subImageHeight_)/2,subImageWidth_,subImageHeight_);
     templateRect_=Rect((workingRect_.width-templateWidth_)/2,(workingRect_.height-templateHeight_)/2,templateWidth_,templateHeight_);
     workingCenter_=Point(workingRect_.x+subImageWidth_/2,workingRect_.y+subImageHeight_/2);
+
+    //initialisation de la caméra
     webCam_ = VideoCapture(0);
     webCam_.set(CV_CAP_PROP_FRAME_WIDTH,frameWidth_);
     webCam_.set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight_);
@@ -34,10 +36,13 @@ Widget::Widget(QWidget *parent) :
         cout<<"Error openning the default camera !"<<endl;
     }
 
+    // Get frame1
     webCam_ >> frame1_;
 
+    // Mirror effect
     flip(frame1_,frame1_,1);
 
+    // Extract rect1 and convert to gray
     cvtColor(Mat(frame1_,workingRect_),frameRect1_,COLOR_BGR2GRAY);
 }
 
@@ -58,6 +63,9 @@ Widget::~Widget()
  */
 void Widget::paintEvent(QPaintEvent *event)
 {
+    ui->nombredevie->setText(QString("Nombre de vies restantes : ")+QString::number(ui->GameScreen->getPartie().getLife()));
+    ui->nombredepoint->setText(QString("Points : ")+QString::number(ui->GameScreen->getPartie().getNombrePoint()));
+
     // Create the matchTemplate frame2_ result
     Mat resultImage;    // to store the matchTemplate result
     int result_cols =  frame1_.cols-templateWidth_  + 1;
@@ -89,6 +97,18 @@ void Widget::paintEvent(QPaintEvent *event)
         Point p(workingCenter_.x+vect.x,workingCenter_.y+vect.y);
         arrowedLine(frame2_,workingCenter_,p,Scalar(255,255,255),2);
 
+        // Si la valeur absolue du vecteur est supérieur a 15 et que la partie n'est pas en pause
+        if (abs(p.x-workingCenter_.x)>=15&&!ui->GameScreen->getState()){
+
+            if (p.x-workingCenter_.x>0){
+                cout<<p.x-workingCenter_.x<<"Move droite"<<endl;
+                ui->GameScreen->getPartie().getPasserelle()->move(3,ui->GameScreen->getPartie().getWallLeft(),ui->GameScreen->getPartie().getWallRight());
+            }
+            else if(p.x-workingCenter_.x<0){
+                cout<<p.x-workingCenter_.x<<"Move left"<<endl;
+                ui->GameScreen->getPartie().getPasserelle()->move(-3,ui->GameScreen->getPartie().getWallLeft(),ui->GameScreen->getPartie().getWallRight());
+            }
+        }
         // Convert to Qt frame2_
         QImage img= QImage((const unsigned char*)(frame2_.data),frame2_.cols,frame2_.rows,QImage::Format_RGB888);
         // Rescale QImage to the size of the CamWidget
@@ -117,7 +137,19 @@ void Widget::keyPressEvent(QKeyEvent *event){
         close();
         break;
     }
+    // Pour calibrer le verteur
+    case Qt::Key_Enter:
+    {
+        // Get frame1
+        webCam_ >> frame1_;
 
+        // Mirror effect
+        flip(frame1_,frame1_,1);
+
+        // Extract rect1 and convert to gray
+        cvtColor(Mat(frame1_,workingRect_),frameRect1_,COLOR_BGR2GRAY);
+        break;
+    }
         // Cas par defaut
     default:
     {

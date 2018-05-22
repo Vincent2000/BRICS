@@ -18,6 +18,7 @@ public:
     Game getPartie() const{ return partie_; }
     void setPartie(const Game &partie){ partie_ = partie;}
     void keyPressEvent(QKeyEvent *event);
+    bool getState(){return pause_;}
 
 signals:
 
