@@ -21,17 +21,24 @@ Widget::Widget(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->GameScreen->setPartie(Game());
+
+    //Define rectangle to display
+    workingRect_=Rect((frameWidth_-subImageWidth_)/3,frameHeight_/3+(frameHeight_/3-subImageHeight_)/3,subImageWidth_,subImageHeight_);
+    templateRect_=Rect((workingRect_.width-templateWidth_)/2,(workingRect_.height-templateHeight_)/2,templateWidth_,templateHeight_);
+    workingCenter_=Point(workingRect_.x+subImageWidth_/2,workingRect_.y+subImageHeight_/2);
     webCam_ = VideoCapture(0);
     webCam_.set(CV_CAP_PROP_FRAME_WIDTH,frameWidth_);
     webCam_.set(CV_CAP_PROP_FRAME_HEIGHT,frameHeight_);
     if(!webCam_.isOpened())  // check if we succeeded
     {
-        cout<<"Error openning the default camera !";
+        cout<<"Error openning the default camera !"<<endl;
     }
-    else
-    {
-        cout<<"Default camera open with success";
-    }
+
+    webCam_ >> frame1_;
+
+    flip(frame1_,frame1_,1);
+
+    cvtColor(Mat(frame1_,workingRect_),frameRect1_,COLOR_BGR2GRAY);
 }
 
 /**
@@ -51,58 +58,50 @@ Widget::~Widget()
  */
 void Widget::paintEvent(QPaintEvent *event)
 {
-    //Mise à jour du nombre de vie
-    ui->nombredevie->setText(QString("Nombre de vies restantes : ")+QString::number(ui->GameScreen->getPartie().getLife()));
-    ui->nombredepoint->setText(QString("Points : ")+QString::number(ui->GameScreen->getPartie().getNombrePoint()));
+    // Create the matchTemplate frame2_ result
+    Mat resultImage;    // to store the matchTemplate result
+    int result_cols =  frame1_.cols-templateWidth_  + 1;
+    int result_rows = frame1_.rows-templateHeight_ + 1;
+    resultImage.create( result_cols, result_rows, CV_32FC1 );
 
-    //Definiton des rectangle a afficher
-    for (int i=0;i<3;i++){
-        for (int j=0;j<3;j++){
-            Rect workingRect(frameWidth_/3+50*i,frameHeight_/3+50*j,50,50);
-            motion_Rect_.push_back(workingRect);
-        }
-    }
-
-    //Definition de la frame de reference, de celle de comparaison et des templates
-    Mat frame1,frame2;
-    Vector<Mat> frame1RectVect,frame2RectVect;
-
-    //Capture de la frame de reference
-    webCam_ >> frame1;
-    //Effet mirroir
-    flip(frame1,frame1,1);
-    //Extration des rectangles et convertion en gris
-    Mat frameRectTemp;
-    for (Vector<Rect>::iterator it=motion_Rect_.begin();it!=motion_Rect_.end();it++){
-        cvtColor(Mat(frame1,*it),frameRectTemp,COLOR_BGR2GRAY);
-        frame1RectVect.push_back(frameRectTemp);
-    }
-
-    if(webCam_.read(frame2)){// get a new frame from camera
+    if(webCam_.read(frame2_)){// get a new frame from camera
 
         // Flip to get a mirror effect
-        flip(frame2,frame2,1);
+        flip(frame2_,frame2_,1);
 
         // Invert Blue and Red color channels
-        cvtColor(frame2,frame2,CV_BGR2RGB);
+        cvtColor(frame2_,frame2_,CV_BGR2RGB);
+
+        cvtColor(Mat(frame2_,workingRect_),frameRect2_,COLOR_BGR2GRAY);
+
+        // Extract template image in frame1
+        Mat templateImage(frameRect1_,templateRect_);
+        // Do the Matching between the working rect in frame2 and the templateImage in frame1
+        matchTemplate( frameRect2_, templateImage, resultImage, TM_CCORR_NORMED );
+        // Localize the best match with minMaxLoc
+        double minVal; double maxVal; Point minLoc; Point maxLoc;
+        minMaxLoc( resultImage, &minVal, &maxVal, &minLoc, &maxLoc);
+        // Compute the translation vector between the origin and the matching rect
+        Point vect(maxLoc.x-templateRect_.x,maxLoc.y-templateRect_.y);
 
         // Draw green rectangle and the translation vector
-        for (Vector<Rect>::iterator it=motion_Rect_.begin();it!=motion_Rect_.end();it++){
-            rectangle(frame2,*it,Scalar( 0, 255, 0),2);
-        }
+        rectangle(frame2_,workingRect_,Scalar( 0, 255, 0),2);
+        Point p(workingCenter_.x+vect.x,workingCenter_.y+vect.y);
+        arrowedLine(frame2_,workingCenter_,p,Scalar(255,255,255),2);
 
-        // Convert to Qt frame2
-        QImage img= QImage((const unsigned char*)(frame2.data),frame2.cols,frame2.rows,QImage::Format_RGB888);
+        // Convert to Qt frame2_
+        QImage img= QImage((const unsigned char*)(frame2_.data),frame2_.cols,frame2_.rows,QImage::Format_RGB888);
         // Rescale QImage to the size of the CamWidget
         img=img.scaled(QSize(frameWidth_,frameHeight_), Qt::KeepAspectRatio,Qt::FastTransformation);
 
         // Display on label
         ui->CamView->setPixmap(QPixmap::fromImage(img));
-        // Resize the label to fit the frame2
+        // Resize the label to fit the frame2_
         ui->CamView->resize(ui->CamView->pixmap()->size());
 
+        // Swap matrixes
+        //swap(frameRect1_,frameRect2_);
     }
-    event->accept();
 }
 
 /**

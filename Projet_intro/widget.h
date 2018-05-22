@@ -27,7 +27,15 @@ private:
     VideoCapture webCam_;
     int frameWidth_ = 595;
     int frameHeight_ = 400;
+    int subImageWidth_=100;
+    int subImageHeight_=100;
+    int templateWidth_=25;
+    int templateHeight_=25;
+    Rect workingRect_;
+    Rect templateRect_;
+    Point workingCenter_;
     Vector <Rect> motion_Rect_;
+    Mat frame1_,frame2_,frameRect1_,frameRect2_;
 };
 
 #endif // WIDGET_H
