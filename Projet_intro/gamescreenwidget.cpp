@@ -88,7 +88,7 @@ void GameScreenWidget::resizeGL(int width, int height)
     glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     //glOrtho(-MAX_DIMENSION, MAX_DIMENSION, -MAX_DIMENSION * height / static_cast<float>(width), MAX_DIMENSION * height / static_cast<float>(width), 0.0f, 300.0f);
-    gluPerspective(68, (double)4/3, 114, 121);
+    gluPerspective(68, (double)4/3, 114, 161);
     //glOrtho(0.0, 150.0, 0.0, 200.0, 0.0, 50.0);
     //glOrtho(-ORTHO_DIM * ASPECT_RATIO, ORTHO_DIM * ASPECT_RATIO, -ORTHO_DIM, ORTHO_DIM, 2.0f * ORTHO_DIM, 4.0f * ORTHO_DIM);
     //glOrtho(0, 10000, 0, 1000, 0, 10000);
@@ -113,7 +113,7 @@ void GameScreenWidget::paintGL()
 
     // Reinitialisation de la matrice courante
     glLoadIdentity();
-    gluLookAt(60, 75, 120, 60, 75, 0, 0, 1, 0);
+    gluLookAt(81.63, 97.96,  120+40, 81.63,97.96, 0, 0, 1, 0);
 
     glClearColor(couleurF_.redF(),couleurF_.greenF(),couleurF_.blueF(),couleurF_.alphaF());
 

@@ -15,7 +15,7 @@ public:
     void initializeGL();
     void resizeGL(int width, int height);
     void paintGL();
-    Game getPartie() const{ return partie_; }
+    Game* getPartie() { return &partie_; }
     void setPartie(const Game &partie){ partie_ = partie;}
     void keyPressEvent(QKeyEvent *event);
     bool getState(){return pause_;}

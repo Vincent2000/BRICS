@@ -16,7 +16,7 @@ Game::Game()
 {
     colonne_ = 10;
     ligne_ = 12;
-    espaceEntreBrique_ = 3.0f;
+    espaceEntreBrique_ = (float) 20/3;
     depth_ = 5.0f;
     widthBrique_ = 9.0f;
     heightBrique_ = 3.0f;
